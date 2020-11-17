@@ -7,15 +7,24 @@ package standard_file_manager;
 
 /**
  *
- * @author Carlos Alberto
+ * @author James Josue Molina
  */
-public class Standard_File_Manager {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class Archivo {
+    
+    public void Nuevo(){
+        
+    }
+    
+    public void Salvar(){
+        
+    }
+    
+    public void Cerrar(){
+        
+    }
+    
+    public void Salir(){
+        
     }
     
 }
