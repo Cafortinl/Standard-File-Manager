@@ -144,8 +144,18 @@ public class Principal extends javax.swing.JFrame {
                 jb_modificarCampoMouseClicked(evt);
             }
         });
+        jb_modificarCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_modificarCampoActionPerformed(evt);
+            }
+        });
 
         jb_borrarCampo.setText("Eliminar campo");
+        jb_borrarCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_borrarCampoActionPerformed(evt);
+            }
+        });
 
         jt_listaCampos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -209,7 +219,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jf_menuCamposLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel3.setText("Crear campo");
@@ -473,6 +483,19 @@ public class Principal extends javax.swing.JFrame {
         tf_sizeModCampo.setText("");
         cb_tipoModCampo.setSelectedIndex(0);
     }//GEN-LAST:event_jb_modCampoDialogMouseClicked
+
+    private void jb_borrarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_borrarCampoActionPerformed
+        int aux= jt_listaCampos.getSelectedRow();
+        if (aux >= 0) {
+            camposTemp.remove(aux);
+            actualizarTablaCampos();
+        }
+        
+    }//GEN-LAST:event_jb_borrarCampoActionPerformed
+
+    private void jb_modificarCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_modificarCampoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jb_modificarCampoActionPerformed
 
     private int campoSeleccionado(){
         int campoSeleccionado = -1;
