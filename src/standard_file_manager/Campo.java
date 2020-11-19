@@ -50,9 +50,14 @@ public class Campo {
     
     public String getIsChar(){
         if(isChar)
-            return "Caracter";
+            return "char";
         else
-            return "Entero";
+            return "int";
+    }
+    
+    @Override
+    public String toString(){
+        return nombre + ": " + getIsChar() + '[' + Integer.toString(size) + ']';
     }
     
 }
