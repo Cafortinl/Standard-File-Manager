@@ -98,6 +98,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btn_Salir.setText("Salir");
+        btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jf_menuArchivosLayout = new javax.swing.GroupLayout(jf_menuArchivos.getContentPane());
         jf_menuArchivos.getContentPane().setLayout(jf_menuArchivosLayout);
@@ -559,8 +564,12 @@ public class Principal extends javax.swing.JFrame {
         } catch (IOException ex) {
             System.out.println("ME MAME PERRO x2");
         }
-            
+         JOptionPane.showMessageDialog(this,"Se ha cerrado el archivo");   
     }//GEN-LAST:event_btn_CerrarActionPerformed
+
+    private void btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btn_SalirActionPerformed
 
     private int campoSeleccionado(){
         int campoSeleccionado = -1;
