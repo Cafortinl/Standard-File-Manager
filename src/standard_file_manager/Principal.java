@@ -6,7 +6,9 @@
 
 package standard_file_manager;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -25,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
     /** Creates new form Principal */
     public Principal() {
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -40,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btn_Nuevo = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
-        btn_Crear = new javax.swing.JButton();
+        btn_Cerrar = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
         jf_menuCampos = new javax.swing.JFrame();
         jLabel2 = new javax.swing.JLabel();
@@ -81,8 +84,18 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btn_Salvar.setText("Salvar");
+        btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SalvarActionPerformed(evt);
+            }
+        });
 
-        btn_Crear.setText("Crear");
+        btn_Cerrar.setText("Cerrar");
+        btn_Cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_CerrarActionPerformed(evt);
+            }
+        });
 
         btn_Salir.setText("Salir");
 
@@ -103,7 +116,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(btn_Nuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jf_menuArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btn_Salir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_Crear, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btn_Cerrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap(208, Short.MAX_VALUE))
         );
         jf_menuArchivosLayout.setVerticalGroup(
@@ -116,7 +129,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(btn_Salvar)
                 .addGap(47, 47, 47)
-                .addComponent(btn_Crear)
+                .addComponent(btn_Cerrar)
                 .addGap(36, 36, 36)
                 .addComponent(btn_Salir)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -391,16 +404,16 @@ public class Principal extends javax.swing.JFrame {
     private void btn_NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NuevoActionPerformed
         JFileChooser path = new JFileChooser();
         path.showOpenDialog(this);
-        File file;
+        //File file;
         if( path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length()-4,path.getSelectedFile().getPath().length()-1).equals(".txt") ){
-            file = new File(path.getSelectedFile().getPath());
+            Uni_archivo= new File(path.getSelectedFile().getPath());
         }
         else{
-            file = new File(path.getSelectedFile().getPath()+".txt");
+            Uni_archivo= new File(path.getSelectedFile().getPath()+".txt");
         }
-        if( !file.exists() ){
+        if( !Uni_archivo.exists() ){
             try {
-                file.createNewFile();
+               Uni_archivo.createNewFile();
             } catch (IOException ex) {
                ex.printStackTrace();
             }
@@ -497,6 +510,58 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jb_modificarCampoActionPerformed
 
+    private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
+        
+        
+       
+        if(!camposTemp.isEmpty()){
+            String metaData="";
+            int recordSize=0;
+            for (int i = 0; i < camposTemp.size(); i++) {
+                if(i==0){
+                    metaData+='{';
+                } 
+                metaData+=camposTemp.get(i).toString();
+                if(i==camposTemp.size()-1){
+                    metaData+='}';
+                }else{
+                    metaData+=", ";
+                }
+               recordSize+=camposTemp.get(i).getSize()+1; 
+            }
+            metaData+="\n"+Integer.toString(recordSize);
+           
+        try {
+            fw = new FileWriter(Uni_archivo);
+            bw = new BufferedWriter(fw);
+            bw.append(metaData);
+            bw.flush();
+            bw.close();
+            fw.close();
+            JOptionPane.showMessageDialog(this,"Se ha salvado correctamente");
+        } catch (IOException ex) {
+            System.out.println("ME MAME PERRIN");
+        }
+        
+        }else{
+            jf_menuCampos.pack();
+            jf_menuCampos.setVisible(true);
+            jf_menuCampos.setLocationRelativeTo(this); 
+        } 
+       
+            //jf_menuArchivos.setVisible(false);
+    }//GEN-LAST:event_btn_SalvarActionPerformed
+
+    private void btn_CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CerrarActionPerformed
+        try {
+            bw.close();
+            fw.close();
+        } catch (IOException ex) {
+            System.out.println("ME MAME PERRO x2");
+        }
+            
+    }//GEN-LAST:event_btn_CerrarActionPerformed
+
     private int campoSeleccionado(){
         int campoSeleccionado = -1;
         DefaultTableModel modelo = (DefaultTableModel) jt_listaCampos.getModel();
@@ -577,7 +642,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Crear;
+    private javax.swing.JButton btn_Cerrar;
     private javax.swing.JButton btn_Nuevo;
     private javax.swing.JButton btn_Salir;
     private javax.swing.JButton btn_Salvar;
@@ -614,4 +679,7 @@ public class Principal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     ArrayList<Campo> camposTemp = new ArrayList();
     int campoSelec;
+    File Uni_archivo;
+    BufferedWriter bw;
+     FileWriter fw;
 }
