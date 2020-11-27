@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class Registro {
     private ArrayList<String> pablo=new ArrayList();
+    private String ID;
     private int size;
 
     public Registro() {
@@ -31,10 +32,18 @@ public class Registro {
         return size;
     }
 
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
     public void setPablo(ArrayList<String> pablo) {
         this.pablo = pablo;
     }
-
+    
     public void setSize(int size) {
         this.size = size;
     }
