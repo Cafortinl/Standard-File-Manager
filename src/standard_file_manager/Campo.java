@@ -17,6 +17,18 @@ public class Campo {
     public Campo() {
     }
 
+    public Campo(String info) {
+        String[] infoStr = info.split(": ");
+        nombre = infoStr[0];
+        if(infoStr[1].charAt(0) == 'c'){
+            isChar = true;
+            size = Integer.parseInt(infoStr[1].substring(5, infoStr[1].length()-1));
+        }else{
+            isChar = false;
+            size = Integer.parseInt(infoStr[1].substring(4, infoStr[1].length()-1));
+        }
+    }
+    
     public Campo(String nombre, boolean isChar, int size) {
         this.nombre = nombre;
         this.isChar = isChar;

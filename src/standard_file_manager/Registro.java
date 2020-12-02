@@ -24,6 +24,16 @@ public class Registro {
         this.size = size;
     }
 
+    public Registro(String info){
+        String[] campos = info.split("|");
+        int s = 0;
+        for(int i = 0; i < campos.length;i++){
+            pablo.add(campos[i]);
+            s += campos[i].length() + 1;
+        }
+        size = s;
+    }
+    
     public ArrayList<String> getPablo() {
         return pablo;
     }
@@ -63,7 +73,14 @@ public class Registro {
     
     @Override
     public String toString() {
-        return "Registro{" + "pablo=" + pablo + ", size=" + size + '}';
+        String output = "";
+        for (String st : pablo) {
+            output += st + '|';
+        }
+        while(output.length() < size){
+            output += '*';
+        }
+        return output;
     }
 
 }

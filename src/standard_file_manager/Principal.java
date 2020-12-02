@@ -7,6 +7,7 @@ package standard_file_manager;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class Principal extends javax.swing.JFrame {
         btn_Cerrar = new javax.swing.JButton();
         btn_Salir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jb_abrirArchivo = new javax.swing.JButton();
         jf_menuCampos = new javax.swing.JFrame();
         jLabel2 = new javax.swing.JLabel();
         jb_crearCampo = new javax.swing.JButton();
@@ -135,6 +137,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jb_abrirArchivo.setText("Abrir");
+        jb_abrirArchivo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_abrirArchivoMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jf_menuArchivosLayout = new javax.swing.GroupLayout(jf_menuArchivos.getContentPane());
         jf_menuArchivos.getContentPane().setLayout(jf_menuArchivosLayout);
         jf_menuArchivosLayout.setHorizontalGroup(
@@ -148,14 +157,18 @@ public class Principal extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jf_menuArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jf_menuArchivosLayout.createSequentialGroup()
-                                .addGroup(jf_menuArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btn_Salvar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btn_Nuevo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btn_Nuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
                                 .addComponent(jButton2))
                             .addGroup(jf_menuArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(btn_Salir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btn_Cerrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(btn_Cerrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jf_menuArchivosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_Salvar))
+                    .addGroup(jf_menuArchivosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jb_abrirArchivo, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(208, Short.MAX_VALUE))
         );
         jf_menuArchivosLayout.setVerticalGroup(
@@ -167,13 +180,15 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jf_menuArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Nuevo)
                     .addComponent(jButton2))
-                .addGap(50, 50, 50)
+                .addGap(38, 38, 38)
+                .addComponent(jb_abrirArchivo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(btn_Salvar)
-                .addGap(47, 47, 47)
+                .addGap(32, 32, 32)
                 .addComponent(btn_Cerrar)
-                .addGap(36, 36, 36)
+                .addGap(29, 29, 29)
                 .addComponent(btn_Salir)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(46, 46, 46))
         );
 
         jLabel2.setText("Menú campos");
@@ -622,14 +637,18 @@ public class Principal extends javax.swing.JFrame {
         JFileChooser path = new JFileChooser();
         path.showOpenDialog(this);
         //File file;
-        if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length() - 1).equals(".txt")) {
+        System.out.println(path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()));
+        if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
             Uni_archivo = new File(path.getSelectedFile().getPath());
+            archivo.setArchivo(Uni_archivo);
         } else {
             Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
+            archivo.setArchivo(Uni_archivo);
         }
         if (!Uni_archivo.exists()) {
             try {
                 Uni_archivo.createNewFile();
+                archivo.setArchivo(Uni_archivo);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
@@ -733,8 +752,8 @@ public class Principal extends javax.swing.JFrame {
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
 
         if (!camposTemp.isEmpty()) {
-            String metaData = "";
-            int recordSize = 0;
+            String metaData = "", registros = "";
+            int recordSize = 0, recNum = 0;
             for (int i = 0; i < camposTemp.size(); i++) {
                 if (i == 0) {
                     metaData += '{';
@@ -748,7 +767,8 @@ public class Principal extends javax.swing.JFrame {
                 recordSize += camposTemp.get(i).getSize() + 1;
             }
             metaData += "\n" + Integer.toString(recordSize);
-
+            metaData += "\n" + recNum;
+      
             try {
                 fw = new FileWriter(Uni_archivo);
                 bw = new BufferedWriter(fw);
@@ -932,6 +952,28 @@ public class Principal extends javax.swing.JFrame {
         jb_modificarRegistro.setEnabled(true);
     }//GEN-LAST:event_jt_listaCampos1MouseClicked
 
+    private void jb_abrirArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_abrirArchivoMouseClicked
+        JFileChooser path = new JFileChooser();
+        path.showOpenDialog(this);
+        //File file;
+        if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
+            System.out.println(path.getSelectedFile().getPath());
+            Uni_archivo = new File(path.getSelectedFile().getPath());
+            try {
+                archivo = new Archivo(Uni_archivo);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            }
+        } /*else {
+            Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
+            try {
+                archivo = new Archivo(Uni_archivo);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }*/
+    }//GEN-LAST:event_jb_abrirArchivoMouseClicked
+
     public static boolean calcIsNumeric(String x) {
         boolean isNumeric = true;
         try {
@@ -1045,6 +1087,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jb_abrirArchivo;
     private javax.swing.JButton jb_borrarCampo;
     private javax.swing.JButton jb_borrarCampo1;
     private javax.swing.JButton jb_borrarCampo2;
@@ -1076,6 +1119,7 @@ public class Principal extends javax.swing.JFrame {
     ArrayList<Campo> camposTemp = new ArrayList();
     int campoSelec;
     File Uni_archivo;
+    Archivo archivo = new Archivo();
     BufferedWriter bw;
     FileWriter fw;
     ArrayList<Registro> RegistroTemp = new ArrayList();
