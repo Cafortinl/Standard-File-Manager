@@ -458,13 +458,13 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jb_modificarRegistro" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jb_listarCampos1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jb_crearCampo1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jb_borrarCampo1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jb_borrarCampo2" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jb_borrarCampo3" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jb_borrarCampo4" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jb_borrarCampo5" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jb_IntroducirRegistro" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jb_CargarRegistros" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jb_buscarRegistro" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jb_BorrarRegistro" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jb_ListarRegistro" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jb_CruzarArchivo" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jb_VolverRegistro" alignment="1" max="32767" attributes="0"/>
                       <Component id="cb_registros" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -491,19 +491,19 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jb_crearCampo1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_CargarRegistros" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jb_listarCampos1" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="jb_IntroducirRegistro" min="-2" pref="23" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jb_borrarCampo1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_buscarRegistro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jb_borrarCampo2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_BorrarRegistro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="jb_borrarCampo3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_ListarRegistro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jb_borrarCampo4" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_CruzarArchivo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jb_borrarCampo5" min="-2" max="-2" attributes="0"/>
+                          <Component id="jb_VolverRegistro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jb_modificarRegistro" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -523,21 +523,21 @@
             <Property name="text" type="java.lang.String" value="MENU REGISTROS"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_crearCampo1">
+        <Component class="javax.swing.JButton" name="jb_CargarRegistros">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cargar Registros"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_crearCampo1MouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_CargarRegistrosMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_listarCampos1">
+        <Component class="javax.swing.JButton" name="jb_IntroducirRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Introducir Registro"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_listarCampos1MouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_listarCampos1ActionPerformed"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_IntroducirRegistroMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_IntroducirRegistroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jb_modificarRegistro">
@@ -549,12 +549,12 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jb_modificarRegistroMouseClicked"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_borrarCampo1">
+        <Component class="javax.swing.JButton" name="jb_buscarRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar Registro"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_borrarCampo1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_buscarRegistroActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -609,36 +609,36 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jb_borrarCampo2">
+        <Component class="javax.swing.JButton" name="jb_BorrarRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Borrar Registro"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_borrarCampo2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_BorrarRegistroActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_borrarCampo3">
+        <Component class="javax.swing.JButton" name="jb_ListarRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Listar Registro"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_borrarCampo3ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_ListarRegistroActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_borrarCampo4">
+        <Component class="javax.swing.JButton" name="jb_CruzarArchivo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cruzar Archivo"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_borrarCampo4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_CruzarArchivoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jb_borrarCampo5">
+        <Component class="javax.swing.JButton" name="jb_VolverRegistro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Volver"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_borrarCampo5ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jb_VolverRegistroActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cb_registros">

@@ -25,13 +25,18 @@ public class Registro {
     }
 
     public Registro(String info){
-        String[] campos = info.split("|");
-        int s = 0;
-        for(int i = 0; i < campos.length;i++){
+        String[] campos = info.split("\\|");
+        int s = 8;
+        //System.out.println(campos.length);
+        //ID=campos[9];
+        
+        for(int i = 1; i < campos.length-1;i++){
             pablo.add(campos[i]);
             s += campos[i].length() + 1;
         }
         size = s;
+        ID=campos[0];
+        System.out.println(ID);
     }
     
     public ArrayList<String> getPablo() {
@@ -74,6 +79,7 @@ public class Registro {
     @Override
     public String toString() {
         String output = "";
+        output+=ID+'|';
         for (String st : pablo) {
             output += st + '|';
         }

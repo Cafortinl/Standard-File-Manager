@@ -41,9 +41,11 @@ public class Archivo {
             for (String cp : cps) {
                 campos.add(new Campo(cp));
             }
-            contRegis = Integer.parseInt(br.readLine());
             sizeRegis = Integer.parseInt(br.readLine());
+            contRegis = Integer.parseInt(br.readLine());
+            System.out.println(contRegis);
             while((camposString = br.readLine()) != null){
+                //System.out.println(camposString);
                 registros.add(new Registro(camposString));
             }
             System.out.println(contRegis);
@@ -78,7 +80,15 @@ public class Archivo {
     public ArrayList<Campo> getCampos() {
         return campos;
     }
-
+    public void addCampo(Campo camp){
+        this.campos.add(camp);
+    }  
+    public void addRegistro(Registro regis){
+        regis.setID("MMCJ"+contRegis);
+        contRegis++;
+        this.registros.add(regis);
+        
+    }
     public void setCampos(ArrayList<Campo> campos) {
         this.campos = campos;
     }
