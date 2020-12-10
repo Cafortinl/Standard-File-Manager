@@ -95,10 +95,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
-        jb_abrirArchivo1 = new javax.swing.JButton();
-        btn_Nuevo1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jFileChooser1 = new javax.swing.JFileChooser();
         btn_Salvar1 = new javax.swing.JButton();
+        btn_Nuevo1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         btn_Cerrar1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -551,9 +552,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Manejo de Registros");
-        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
+        getContentPane().add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
-        jTabbedPane5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTabbedPane5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane5MouseClicked(evt);
@@ -562,17 +562,30 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel2.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jButton4.setText("Volver");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jb_abrirArchivo1.setText("Abrir");
-        jb_abrirArchivo1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jb_abrirArchivo1MouseClicked(evt);
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 601, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btn_Salvar1.setText("Salvar");
+        btn_Salvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_Salvar1ActionPerformed(evt);
             }
         });
 
@@ -583,10 +596,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        btn_Salvar1.setText("Salvar");
-        btn_Salvar1.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_Salvar1ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -604,29 +617,30 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_Cerrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_Nuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton4))
-                    .addComponent(jb_abrirArchivo1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Salvar1))
-                .addContainerGap(401, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(btn_Salvar1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_Cerrar1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Salvar1)
                     .addComponent(btn_Nuevo1)
-                    .addComponent(jButton4))
-                .addGap(26, 26, 26)
-                .addComponent(jb_abrirArchivo1)
-                .addGap(26, 26, 26)
-                .addComponent(btn_Salvar1)
-                .addGap(18, 18, 18)
-                .addComponent(btn_Cerrar1)
-                .addContainerGap(160, Short.MAX_VALUE))
+                    .addComponent(jButton1)
+                    .addComponent(btn_Cerrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane5.addTab("Archivos", jPanel2);
@@ -685,7 +699,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Tipo");
 
-        jb_cancelar.setText("Cancelar");
+        jb_cancelar.setText("Reiniciar");
         jb_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jb_cancelarActionPerformed(evt);
@@ -823,21 +837,23 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
 
         jTabbedPane5.addTab("Campos", jPanel3);
+
+        jPanel4.setBorder(new javax.swing.border.MatteBorder(null));
 
         jt_listaCampos3.setBorder(new javax.swing.border.MatteBorder(null));
         jt_listaCampos3.setModel(new javax.swing.table.DefaultTableModel(
@@ -941,28 +957,30 @@ public class Principal extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_registros1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_ListarRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 3, Short.MAX_VALUE)
-                        .addComponent(jLabel16)
-                        .addGap(8, 8, 8))
-                    .addComponent(jb_IntroducirRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_buscarRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_BorrarRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_CruzarArchivo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jb_modificarRegistro1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel16))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_registros1, 0, 139, Short.MAX_VALUE)
+                            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jb_modificarRegistro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jb_CruzarArchivo1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jb_ListarRegistro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jb_buscarRegistro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jb_IntroducirRegistro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                                .addComponent(jb_BorrarRegistro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel16)
-                .addGap(18, 18, 18)
-                .addComponent(jb_IntroducirRegistro1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jb_IntroducirRegistro1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jb_buscarRegistro1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -984,17 +1002,17 @@ public class Principal extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane6)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -1005,10 +1023,10 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane5.addTab("Registro", jPanel4);
 
-        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 587, -1));
+        getContentPane().add(jTabbedPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 660, 400));
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/fondo.jpg"))); // NOI18N
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 640, 470));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -7, 700, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1385,52 +1403,31 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_Salvar1ActionPerformed
 
     private void btn_Nuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo1ActionPerformed
-        JFileChooser path = new JFileChooser();
-        path.showOpenDialog(this);
-        //File file;
-        System.out.println(path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()));
-        if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
-            Uni_archivo = new File(path.getSelectedFile().getPath());
-            archivo.setArchivo(Uni_archivo);
-        } else {
-            Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
-            archivo.setArchivo(Uni_archivo);
-        }
-        if (!Uni_archivo.exists()) {
-            try {
-                Uni_archivo.createNewFile();
+        try{
+            JFileChooser path = new JFileChooser();
+            path.showOpenDialog(this);
+            //File file;
+            System.out.println(path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()));
+            if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
+                Uni_archivo = new File(path.getSelectedFile().getPath());
                 archivo.setArchivo(Uni_archivo);
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } else {
+                Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
+                archivo.setArchivo(Uni_archivo);
             }
+            if (!Uni_archivo.exists()) {
+                try {
+                    Uni_archivo.createNewFile();
+                    archivo.setArchivo(Uni_archivo);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }catch(Exception e){
+            
         }
+        
     }//GEN-LAST:event_btn_Nuevo1ActionPerformed
-
-    private void jb_abrirArchivo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_abrirArchivo1MouseClicked
-        JFileChooser path = new JFileChooser();
-        path.showOpenDialog(this);
-        //File file;
-        if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
-            System.out.println(path.getSelectedFile().getPath());
-            Uni_archivo = new File(path.getSelectedFile().getPath());
-            try {
-                archivo = new Archivo(Uni_archivo);
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        } /*else {
-            Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
-            try {
-                archivo = new Archivo(Uni_archivo);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }*/
-    }//GEN-LAST:event_jb_abrirArchivo1MouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTabbedPane5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane5MouseClicked
         deshabilitar();
@@ -1538,31 +1535,35 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_IntroducirRegistro1MouseClicked
 
     private void jb_IntroducirRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_IntroducirRegistro1ActionPerformed
-        Registro temp = new Registro();
-        for (int i = 0; i <archivo.getCampos().size(); i++) {
-            String aux = JOptionPane.showInputDialog(null, "Ingrese el campo (" + archivo.getCampos().get(i).toString() + ")");
-            if (archivo.getCampos().get(i).isIsChar()) {
-                if (aux.length() <= archivo.getCampos().get(i).getSize()) {
-                    temp.Agregar(aux);
-                } else {
-                    while (!(aux.length() <= archivo.getCampos().get(i).getSize())) {
-                        aux = JOptionPane.showInputDialog(null, "Ingrese el campo nuevamente (" + archivo.getCampos().get(i).toString() + ")");
+        try{
+            Registro temp = new Registro();
+            for (int i = 0; i <archivo.getCampos().size(); i++) {
+                String aux = JOptionPane.showInputDialog(null, "Ingrese el campo (" + archivo.getCampos().get(i).toString() + ")");
+                if (archivo.getCampos().get(i).isIsChar()) {
+                    if (aux.length() <= archivo.getCampos().get(i).getSize()) {
+                        temp.Agregar(aux);
+                    } else {
+                        while (!(aux.length() <= archivo.getCampos().get(i).getSize())) {
+                            aux = JOptionPane.showInputDialog(null, "Ingrese el campo nuevamente (" + archivo.getCampos().get(i).toString() + ")");
+                        }
+                        temp.Agregar(aux);
                     }
-                    temp.Agregar(aux);
-                }
-            } else {
-                if (aux.length() <= archivo.getCampos().get(i).getSize() && calcIsNumeric(aux)) {
-                    temp.Agregar(aux);
                 } else {
-                    while (!(aux.length() <= archivo.getCampos().get(i).getSize() && calcIsNumeric(aux))) {
-                        aux = JOptionPane.showInputDialog(null, "Ingrese el campo nuevamente (" + archivo.getCampos().get(i).toString() + ")");
+                    if (aux.length() <= archivo.getCampos().get(i).getSize() && calcIsNumeric(aux)) {
+                        temp.Agregar(aux);
+                    } else {
+                        while (!(aux.length() <= archivo.getCampos().get(i).getSize() && calcIsNumeric(aux))) {
+                            aux = JOptionPane.showInputDialog(null, "Ingrese el campo nuevamente (" + archivo.getCampos().get(i).toString() + ")");
+                        }
+                        temp.Agregar(aux);
                     }
-                    temp.Agregar(aux);
-                }
-            }//btn_Salir
+                }//btn_Salir
+            }
+            //temp.setID("MMCJ" + (IDTemp++));
+            archivo.addRegistro(temp);
+        }catch(Exception e){
+            
         }
-        //temp.setID("MMCJ" + (IDTemp++));
-        archivo.addRegistro(temp);
     }//GEN-LAST:event_jb_IntroducirRegistro1ActionPerformed
 
     private void jb_CargarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_CargarRegistrosActionPerformed
@@ -1599,6 +1600,11 @@ public class Principal extends javax.swing.JFrame {
         jb_modificarRegistro1.setEnabled(false);
     }//GEN-LAST:event_jb_modificarRegistro1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Excel E = new Excel(archivo.getCampos(),archivo.getRegistros());
+        E.CrearArchivo();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void deshabilitar(){
         jt_nombrecampo.setEnabled(false);
         js_tamanocampo.setEnabled(false);
@@ -1606,7 +1612,7 @@ public class Principal extends javax.swing.JFrame {
         jb_modificarCampo1.setEnabled(false);
         jb_crearCampo1.setEnabled(false);
         jb_borrarCampo1.setEnabled(false);
-        jb_cancelar.setEnabled(false);
+        //jb_cancelar.setEnabled(false);
         jt_nombrecampo.setText("");
         js_tamanocampo.setValue(0);
         cb_tipocampo.setSelectedIndex(0);
@@ -1717,7 +1723,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_tipoCampo;
     private javax.swing.JComboBox<String> cb_tipoModCampo;
     private javax.swing.JComboBox<String> cb_tipocampo;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1737,6 +1744,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1759,7 +1767,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_ListarRegistro;
     private javax.swing.JButton jb_ListarRegistro1;
     private javax.swing.JButton jb_VolverRegistro;
-    private javax.swing.JButton jb_abrirArchivo1;
     private javax.swing.JButton jb_borrarCampo;
     private javax.swing.JButton jb_borrarCampo1;
     private javax.swing.JButton jb_borrarCampo6;
