@@ -30,7 +30,7 @@ public class Registro {
         //System.out.println(campos.length);
         //ID=campos[9];
         
-        for(int i = 1; i < campos.length-1;i++){
+        for(int i = 1; i < campos.length;i++){
             pablo.add(campos[i]);
             s += campos[i].length() + 1;
         }

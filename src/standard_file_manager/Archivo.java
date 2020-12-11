@@ -38,14 +38,16 @@ public class Archivo {
             String camposString = br.readLine();
             System.out.println(camposString);
             String[] cps = camposString.substring(1,camposString.length()-1).split(", ");
+            
             for (String cp : cps) {
+                
                 campos.add(new Campo(cp));
             }
             sizeRegis = Integer.parseInt(br.readLine());
             contRegis = Integer.parseInt(br.readLine());
             System.out.println(contRegis);
             while((camposString = br.readLine()) != null){
-                //System.out.println(camposString);
+                System.out.println(camposString);
                 registros.add(new Registro(camposString));
             }
             System.out.println(contRegis);
