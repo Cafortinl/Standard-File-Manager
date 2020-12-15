@@ -1645,8 +1645,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_modificarRegistro1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Excel E = new Excel(archivo.getCampos(),archivo.getRegistros());
-        E.CrearArchivo();
+        try{
+            FileDialog dialogoArchivo;
+            dialogoArchivo = new FileDialog(this, "Lista de Archivos desde Frame",FileDialog.LOAD);
+            dialogoArchivo.setVisible(true);
+            String lugar = dialogoArchivo.getDirectory();
+            String name = dialogoArchivo.getFile();
+            Excel E = new Excel(archivo.getCampos(),archivo.getRegistros(), name, lugar);
+            E.CrearArchivo();
+       }catch( Exception e ){
+           e.printStackTrace();
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

@@ -22,14 +22,20 @@ public class Excel {
 
     private ArrayList<Campo> campos;
     private ArrayList<Registro> registro;
+    private String ruta;
+    private String nombre;
 
-    public Excel(ArrayList<Campo> campos, ArrayList<Registro> registros) {
+    public Excel(ArrayList<Campo> campos, ArrayList<Registro> registros, String nombre, String ruta) {
         this.campos = campos;
         this.registro = registros;
+        this.ruta = ruta;
+        this.nombre = nombre;
     }
 
     public void CrearArchivo() {
-        String rutaArchivo = "Proyecto.xlsx";
+        
+        
+        String rutaArchivo = ruta + "/"+ nombre + ".xlsx";
         String hoja = "Hoja1";
         XSSFWorkbook libro = new XSSFWorkbook();
         XSSFSheet hoja1 = libro.createSheet(hoja);
