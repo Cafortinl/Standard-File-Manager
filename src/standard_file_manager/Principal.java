@@ -1213,7 +1213,7 @@ public class Principal extends javax.swing.JFrame {
         });
         DefaultTableModel modeloListaCampo = (DefaultTableModel) jt_listaCampos1.getModel();
         for (int i = 0; i <archivo.getRegistros().size(); i++) {
-            Object[] id = {archivo.getRegistros().get(i).getID()};
+            Object[] id = {archivo.getRegistros().get(i).getRRN()};
             modeloListaCampo.addRow(id);
         }
         jt_listaCampos1.setModel(modeloListaCampo);
@@ -1397,7 +1397,7 @@ public class Principal extends javax.swing.JFrame {
                 } else {
                     metaData += ", ";
                 }
-                recordSize += archivo.getCampos().get(i).getSize() + 9 ;
+                recordSize += archivo.getCampos().get(i).getSize()+1;
             }
             metaData += "\n" + Integer.toString(recordSize);
             metaData += "\n" + archivo.getContRegis()+"\n";
@@ -1564,7 +1564,7 @@ public class Principal extends javax.swing.JFrame {
         });
         DefaultTableModel modeloListaCampo = (DefaultTableModel) jt_listaCampos3.getModel();
         for (int i = 0; i <archivo.getRegistros().size(); i++) {
-            Object[] id = {archivo.getRegistros().get(i).getID()};
+            Object[] id = {archivo.getRegistros().get(i).getRRN()};
             modeloListaCampo.addRow(id);
         }
         jt_listaCampos3.setModel(modeloListaCampo);
@@ -1581,6 +1581,7 @@ public class Principal extends javax.swing.JFrame {
     private void jb_IntroducirRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_IntroducirRegistro1ActionPerformed
         try{
             Registro temp = new Registro();
+            temp.setSize(archivo.getSizeRegis());
             for (int i = 0; i <archivo.getCampos().size(); i++) {
                 String aux = JOptionPane.showInputDialog(null, "Ingrese el campo (" + archivo.getCampos().get(i).toString() + ")");
                 if (archivo.getCampos().get(i).isIsChar()) {

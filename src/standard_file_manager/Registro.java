@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Registro {
     private ArrayList<String> pablo=new ArrayList();
-    private String ID;
+    private String RRN;
     private int size;
 
     public Registro() {
@@ -24,19 +24,20 @@ public class Registro {
         this.size = size;
     }
 
-    public Registro(String info){
+    public Registro(String info, int rSize, int pos){
         String[] campos = info.split("\\|");
         int s = 8;
         //System.out.println(campos.length);
         //ID=campos[9];
         
-        for(int i = 1; i < campos.length;i++){
+        for(int i = 0; i < campos.length;i++){
             pablo.add(campos[i]);
             s += campos[i].length() + 1;
         }
-        size = s;
-        ID=campos[0];
-        System.out.println(ID);
+        size = rSize;
+        //ID=campos[0];
+        RRN = Integer.toString(pos);
+        System.out.println(RRN);
     }
     
     public ArrayList<String> getPablo() {
@@ -47,12 +48,12 @@ public class Registro {
         return size;
     }
 
-    public String getID() {
-        return ID;
+    public String getRRN() {
+        return RRN;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setRRN(String ID) {
+        this.RRN = ID;
     }
 
     public void setPablo(ArrayList<String> pablo) {
@@ -79,7 +80,6 @@ public class Registro {
     @Override
     public String toString() {
         String output = "";
-        output+=ID+'|';
         for (String st : pablo) {
             output += st + '|';
         }

@@ -46,9 +46,11 @@ public class Archivo {
             sizeRegis = Integer.parseInt(br.readLine());
             contRegis = Integer.parseInt(br.readLine());
             System.out.println(contRegis);
+            int pos = 1;
             while((camposString = br.readLine()) != null){
                 System.out.println(camposString);
-                registros.add(new Registro(camposString));
+                registros.add(new Registro(camposString, sizeRegis, pos));
+                pos++;
             }
             System.out.println(contRegis);
         } catch (IOException ex) {
@@ -86,7 +88,7 @@ public class Archivo {
         this.campos.add(camp);
     }  
     public void addRegistro(Registro regis){
-        regis.setID("MMCJ"+contRegis);
+        regis.setRRN(Integer.toString(contRegis+1));
         contRegis++;
         this.registros.add(regis);
         

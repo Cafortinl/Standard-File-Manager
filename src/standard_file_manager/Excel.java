@@ -52,7 +52,7 @@ public class Excel {
         for (int i = 0; i < document.length; i++) {
             for (int j = 0; j < document[0].length; j++) {
                 if (j == 0) {
-                    document[i][j] = registro.get(i).getID();
+                    document[i][j] = registro.get(i).getRRN();
                 } else {
                     try{
                         document[i][j] = registro.get(i).getPablo().get(j-1);
