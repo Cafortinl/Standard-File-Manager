@@ -1581,6 +1581,8 @@ public class Principal extends javax.swing.JFrame {
     private void jb_IntroducirRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_IntroducirRegistro1ActionPerformed
         try{
             Registro temp = new Registro();
+            if(archivo.getSizeRegis() == 0 && archivo.getCampos().size() != 0)
+                archivo.calcSizeRegis();
             temp.setSize(archivo.getSizeRegis());
             for (int i = 0; i <archivo.getCampos().size(); i++) {
                 String aux = JOptionPane.showInputDialog(null, "Ingrese el campo (" + archivo.getCampos().get(i).toString() + ")");

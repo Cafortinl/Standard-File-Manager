@@ -121,5 +121,10 @@ public class Archivo {
         this.sizeRegis = sizeRegis;
     }
     
-    
+    public void calcSizeRegis(){
+        sizeRegis = 0;
+        for(int i = 0;i < campos.size();i++){
+            sizeRegis += campos.get(i).getSize() + 1;
+        }
+    }
 }
