@@ -50,13 +50,18 @@ public class BTree {
         this.nodeSize = nodeSize;
     }
     
-    public BTreeNode search(BTreeNode node, int key){
+    public int getKey(String info){
+        String[] index = info.split(";");
+        return Integer.parseInt(index[0]);
+    }
+    
+    public BTreeNode search(BTreeNode node, String key){
         BTreeNode temp = node;
         int i = 0;
-        while((i < temp.getKeys().size()) && (key > temp.getKeys().get(i))){
+        while((i < temp.getKeys().size()) && (getKey(key) > getKey(temp.getKeys().get(i)))){
             i++;
         }
-        if((i < temp.getKeys().size()) && (key == temp.getKeys().get(i)))
+        if((i < temp.getKeys().size()) && (getKey(key) == getKey(temp.getKeys().get(i))))
             return temp;
         if(temp.isIsLeaf()){
             return null;
@@ -64,7 +69,7 @@ public class BTree {
             return search(temp.getChildren().get(i),key);
     }
     
-    public void insert(int key){
+    public void insert(String key){
         BTreeNode temp = root;
         if(temp.getKeys().size() == nodeSize - 1){
             BTreeNode nNode = new BTreeNode(null, false);
@@ -78,10 +83,10 @@ public class BTree {
             insertNonFull(temp, key);
     }
     
-    public void insertNonFull(BTreeNode node, int key){
+    public void insertNonFull(BTreeNode node, String key){
         int i = node.getKeys().size()-1;
         if(node.isIsLeaf()){
-            while((i >= 0) && (key < node.getKeys().get(i))){
+            while((i >= 0) && (getKey(key) < getKey(node.getKeys().get(i)))){
 //                if(i+1 != node.getKeys().size())
 //                    node.getKeys().add(i+1, node.getKeys().get(i));
                 i--;
@@ -89,14 +94,14 @@ public class BTree {
             //System.out.println(key +" "+ node.getKeys());
             node.getKeys().add(i+1, key);
         }else{
-            while((i >= 0) && (key < node.getKeys().get(i))){
+            while((i >= 0) && (getKey(key) < getKey(node.getKeys().get(i)))){
                 //System.out.println(key + " " + node.getKeys().get(i));
                 i--;
             }
             i++;
             if(node.getChildren().get(i).getKeys().size() == nodeSize-1){
                 splitChild(node, node.getChildren().get(i), i);
-                if(key > node.getKeys().get(i))
+                if(getKey(key) > getKey(node.getKeys().get(i)))
                     i++;
             }
             //System.out.println(key + " " + node.getChildren().get(i).getKeys());
@@ -127,7 +132,7 @@ public class BTree {
         //System.out.println(nonFullNode.getKeys() + " " + fullNode.getKeys() + " " + nNode.getKeys());
     }
     
-    public void moveKey(int key, BTreeNode oNode, BTreeNode nNode){
+    public void moveKey(String key, BTreeNode oNode, BTreeNode nNode){
         if(nNode.getKeys().isEmpty())
             nNode.getKeys().add(key);
         else
@@ -174,21 +179,21 @@ public class BTree {
             return null;
     }
     
-    public int findPredecesorKey(BTreeNode node, int key){
+    public String findPredecesorKey(BTreeNode node, String key){
         if(node.getParent().getChildren().indexOf(node) != 0)
             return node.getParent().getChildren().get(node.getParent().getChildren().indexOf(node)-1).getKeys().get(node.getParent().getChildren().get(node.getParent().getChildren().indexOf(node)-1).getKeys().size()-1);
         else
-            return Integer.MIN_VALUE;
+            return null;
     }
     
-    public int findSuccesorKey(BTreeNode node, int key){
+    public String findSuccesorKey(BTreeNode node, String key){
         if(node.getParent().getChildren().indexOf(node) != node.getParent().getChildren().size()-1)
             return node.getParent().getChildren().get(node.getParent().getChildren().indexOf(node)+1).getKeys().get(0);
         else
-            return Integer.MIN_VALUE;
+            return null;
     }
     
-    public void removeKey(BTreeNode node, int key){
+    public void removeKey(BTreeNode node, String key){
         node.getKeys().remove(key);
     }
     
@@ -207,8 +212,8 @@ public class BTree {
             return null;
     }
     
-    public void delete(BTreeNode node, int key){
-        int k;
+    public void delete(BTreeNode node, String key){
+        String k;
         if(!node.isIsLeaf()){
             BTreeNode y, z;
             y = precedingChild(node);
@@ -229,7 +234,7 @@ public class BTree {
                 delete(y, key);
             }
         }else{
-            int v;
+            String v;
             BTreeNode y, z, w;
             y = precedingChild(node);
             z = succesorChild(node);

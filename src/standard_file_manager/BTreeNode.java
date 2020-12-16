@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class BTreeNode {
     private BTreeNode parent;
-    private ArrayList<Integer> keys = new ArrayList();
+    private ArrayList<String> keys = new ArrayList();
     private ArrayList<BTreeNode> children = new ArrayList();
     private boolean isLeaf;
 
@@ -33,11 +33,11 @@ public class BTreeNode {
         this.parent = parent;
     }
 
-    public ArrayList<Integer> getKeys() {
+    public ArrayList<String> getKeys() {
         return keys;
     }
 
-    public void setKeys(ArrayList<Integer> keys) {
+    public void setKeys(ArrayList<String> keys) {
         this.keys = keys;
     }
 
