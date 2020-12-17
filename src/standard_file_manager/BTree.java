@@ -70,6 +70,20 @@ public class BTree implements Serializable{
             return search(temp.getChildren().get(i),key);
     }
     
+    public String search2(BTreeNode node, String key){
+        BTreeNode temp = node;
+        int i = 0;
+        while((i < temp.getKeys().size()) && (getKey(key) > getKey(temp.getKeys().get(i)))){
+            i++;
+        }
+        if((i < temp.getKeys().size()) && (getKey(key) == getKey(temp.getKeys().get(i))))
+            return temp.getKeys().get(i);
+        if(temp.isIsLeaf()){
+            return null;
+        }else
+            return search2(temp.getChildren().get(i),key);
+    }
+    
     public void insert(String key){
         BTreeNode temp = root;
         if(temp.getKeys().size() == nodeSize - 1){

@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -1547,7 +1548,43 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_modificarRegistro1MouseClicked
 
     private void jb_buscarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscarRegistro1ActionPerformed
-        // TODO add your handling code here:
+        String key=JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
+        String RRN=bt.getTree().search2(bt.getTree().getRoot(), key);
+        if (RRN==null){
+            JOptionPane.showMessageDialog(null, "El registro buscado no existe o sea eliminado");
+        }else{
+            String metaData = "";//registros = ""
+            int recordSize = 0;//recNum = 0;
+            for (int i = 0; i < archivo.getCampos().size(); i++) {
+                if (i == 0) {
+                    metaData += '{';
+                    }
+                    metaData += archivo.getCampos().get(i).toString();
+                    if (i == archivo.getCampos().size() - 1) {
+                        metaData += '}';
+                } else {
+                    metaData += ", ";
+                }
+                recordSize += archivo.getCampos().get(i).getSize()+1;
+            }
+            metaData +=  Integer.toString(recordSize);
+            metaData +=  archivo.getContRegis();
+            System.out.println("tam:"+metaData.length());
+            RandomAccessFile raf;
+            try {
+                raf = new RandomAccessFile(archivo.getArchivo(), "r");
+                String[] aux=RRN.split(";");
+                raf.seek((metaData.length()+3)+((Integer.parseInt(aux[1])-1)*archivo.getSizeRegis()));
+                
+                String output=raf.readLine();
+                JOptionPane.showMessageDialog(null, "Lo encontro: "+output);
+            } catch (FileNotFoundException ex) {
+                System.out.println("EXPLOTO***********");
+            } catch (IOException ex) {
+                System.out.println("EXPLOTO2***********");
+            }
+            System.out.println("encontre:"+ RRN);
+        }
     }//GEN-LAST:event_jb_buscarRegistro1ActionPerformed
 
     private void jb_BorrarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BorrarRegistro1ActionPerformed
@@ -1792,6 +1829,8 @@ public class Principal extends javax.swing.JFrame {
         }
         return output;
     }
+    
+    
     
     private int campoSeleccionado() {
         int campoSeleccionado = -1;
