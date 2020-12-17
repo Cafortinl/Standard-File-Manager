@@ -75,14 +75,24 @@ public class XMLGenerator {
                 //Key Node
                 Element keyNode = document.createElement("KEY"); 
                 Text nodeKeyValue = document.createTextNode(key.get(i).getNombre());
-                keyNode.appendChild(nodeKeyValue);      
+                keyNode.appendChild(nodeKeyValue);   
+                Element TypeNode = document.createElement("TYPE"); 
+                Text nodeTypeValue;
+                if(key.get(i).isIsChar()){
+                    nodeTypeValue = document.createTextNode("Char"); 
+                }else{
+                    nodeTypeValue = document.createTextNode("Integer");
+                }
+                TypeNode.appendChild(nodeTypeValue);
                 //Value Node
-                Element valueNode = document.createElement("VALUE"); 
+                itemNode.appendChild(keyNode);
+                itemNode.appendChild(TypeNode);
                 for (int j = 0; j < value.get(i).getPablo().size(); j++) {
+                    Element valueNode = document.createElement("VALUE"); 
                     Text nodeValueValue = document.createTextNode(value.get(j).getPablo().get(i)); 
                     valueNode.appendChild(nodeValueValue);
                     //append keyNode and valueNode to itemNode
-                    itemNode.appendChild(keyNode);
+                    //
                     itemNode.appendChild(valueNode);
                     //append itemNode to raiz
                     raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
