@@ -22,91 +22,49 @@ import org.w3c.dom.Text;
 
 public class XMLGenerator {
 
-//    public static void main(String[] args) {
-//        String nombre_archivo = "geekyxml";
-//        ArrayList key = new ArrayList();
-//        ArrayList value = new ArrayList();
-//
-//        key.add("opcion1");
-//        value.add("22");
-//
-//        key.add("opcion2");
-//        value.add("22");
-//
-//        key.add("opcion3");
-//        value.add("22");
-//
-//        key.add("opcion4");
-//        value.add("25");
-//
-//        try { 
-//          //  generate(nombre_archivo, key, value);
-//        } catch (Exception e) {}
-//    }
-
     public XMLGenerator(){
     }
     
-    public void generate(String path, String name, ArrayList<Campo> key,ArrayList<Registro> value) throws Exception{
-        for (int j = 0; j < value.size(); j++) {
-            for (int i = 0; i < value.get(j).getPablo().size(); i++) {
-                System.out.println("<"+value.get(i).getPablo().get(j)+">");
-            }
-        }
-        if(key.isEmpty() || value.isEmpty() || key.size()!=value.size()){
-            System.out.println("ERROR empty ArrayList");
-            System.out.println(key.size());
-            System.out.println(value.size());
-            return;
-        }else{
-
+    public void generate(String path, String name, ArrayList<Campo> key,ArrayList<Registro> value) throws Exception{ 
+        try{
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             DOMImplementation implementation = builder.getDOMImplementation();
             Document document = implementation.createDocument(null, name, null);
             document.setXmlVersion("1.0");
-
-            //Main Node
             Element raiz = document.getDocumentElement();
-            //Por cada key creamos un item que contendrá la key y el value
-            for(int i=0; i<key.size();i++){
-                //Item Node
-                Element itemNode = document.createElement("ITEM"); 
-                //Key Node
-                Element keyNode = document.createElement("KEY"); 
-                Text nodeKeyValue = document.createTextNode(key.get(i).getNombre());
-                keyNode.appendChild(nodeKeyValue);   
-                Element TypeNode = document.createElement("TYPE"); 
-                Text nodeTypeValue;
-                if(key.get(i).isIsChar()){
-                    nodeTypeValue = document.createTextNode("Char"); 
-                }else{
-                    nodeTypeValue = document.createTextNode("Integer");
-                }
-                TypeNode.appendChild(nodeTypeValue);
-                //Value Node
-                itemNode.appendChild(keyNode);
-                itemNode.appendChild(TypeNode);
-                for (int j = 0; j < value.get(i).getPablo().size(); j++) {
+            for (int j = 0; j < value.size(); j++) {
+                Element itemNode = document.createElement("REGISTER"); 
+                for(int i=0; i<key.size();i++){
+                    Element CampNode = document.createElement("CAMP");
+                    Text nodeCampoValue = document.createTextNode(key.get(i).getNombre());
+                    CampNode.appendChild(nodeCampoValue);
+                    itemNode.appendChild(CampNode);
+                    Element TypeNode = document.createElement("TYPE"); 
+                    Text nodeTypeValue;
+                    if(key.get(i).isIsChar()){
+                        nodeTypeValue = document.createTextNode("Char"); 
+                    }else{
+                        nodeTypeValue = document.createTextNode("Integer");
+                    }
+                    TypeNode.appendChild(nodeTypeValue);
+                    itemNode.appendChild(TypeNode);
                     Element valueNode = document.createElement("VALUE"); 
                     Text nodeValueValue = document.createTextNode(value.get(j).getPablo().get(i)); 
                     valueNode.appendChild(nodeValueValue);
-                    //append keyNode and valueNode to itemNode
-                    //
                     itemNode.appendChild(valueNode);
-                    //append itemNode to raiz
-                    raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
-                }
-            }                
-            //Generate XML
+                    raiz.appendChild(itemNode);
+                }         
+            }
             Source source = new DOMSource(document);
-            //Indicamos donde lo queremos almacenar
             System.out.println("NAME: "+path);
             File archivo = new File(path+"/"+name+".xml");
-            Result result = new StreamResult(archivo); //nombre del archivo
+            Result result = new StreamResult(archivo);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
-        }
+        }catch(Exception e){
+            e.printStackTrace();
+        } 
     }
 
 }
