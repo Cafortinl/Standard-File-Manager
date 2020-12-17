@@ -18,6 +18,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
 public class XMLGenerator {
@@ -33,6 +34,9 @@ public class XMLGenerator {
             Document document = implementation.createDocument(null, name, null);
             document.setXmlVersion("1.0");
             Element raiz = document.getDocumentElement();
+            Node pi = document.createProcessingInstruction
+            ("xml-stylesheet", "type=\"text/xsl\" href=\"gato.xsl\"");
+            document.insertBefore(pi, raiz);
             for (int j = 0; j < value.size(); j++) {
                 Element itemNode = document.createElement("REGISTER"); 
                 for(int i=0; i<key.size();i++){
