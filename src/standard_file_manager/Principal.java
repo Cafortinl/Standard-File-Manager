@@ -14,9 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -24,8 +22,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import java.util.regex.Pattern;
 /**
  *
  * @author James Josue Molina
@@ -1431,25 +1427,6 @@ public class Principal extends javax.swing.JFrame {
             jf_menuCampos.setLocationRelativeTo(this);
 
         }
-
-        //        if(!archivo.getRegistros().isEmpty()){
-            //            //String registro="";
-            //
-            //               try {
-                //
-                //                bw.flush();
-                //                bw.close();
-                //                fw.close();
-                //                JOptionPane.showMessageDialog(this, "Se ha salvado correctamente");
-                //            } catch (IOException ex) {
-                //                System.out.println("ME MAME PERRIN");
-                //            }
-            //        }else{
-            //            JOptionPane.showConfirmDialog(this,"No hay registros que salvar");
-            //
-            //        }
-
-        //jf_menuArchivos.setVisible(false);
     }//GEN-LAST:event_btn_Salvar1ActionPerformed
 
     private void btn_Nuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Nuevo1ActionPerformed
@@ -1569,17 +1546,27 @@ public class Principal extends javax.swing.JFrame {
             }
             metaData +=  Integer.toString(recordSize);
             metaData +=  archivo.getContRegis();
-            System.out.println("tam:"+metaData.length());
-            System.out.println(recordSize + "vs" + archivo.getSizeRegis());
-            RandomAccessFile raf;
             try {
-                raf = new RandomAccessFile(archivo.getArchivo(), "r");
                 String[] aux=RRN.split(";");
-                //System.out.println((metaData.length()+3) + (Integer.parseInt(aux[1])-1) * archivo.getSizeRegis());
-                raf.seek((metaData.length()+2) + (Integer.parseInt(aux[1])-1) * archivo.getSizeRegis());
-                //System.out.println("char:" + raf.read());
-                String output=raf.readLine();
-                JOptionPane.showMessageDialog(this, "Lo encontro: "+output);
+                String output = "---";
+                File raf2 = new File(archivo.getArchivo().getPath());
+                Scanner scan = new Scanner(raf2);
+                int auxSc = 0;
+                int auxSc2 = 0;
+                try{
+                    while( scan.hasNextLine() ){
+                        auxSc++;
+                        if( auxSc > 3 ){
+                            auxSc2++;
+                            if( auxSc2 == Integer.parseInt(aux[1]) ){
+                                output = scan.nextLine();
+                            }
+                        }
+                        scan.nextLine();
+                    }
+                }catch( Exception e ){
+                }
+                JOptionPane.showMessageDialog(this, "Lo encontro: " + output);
             } catch (FileNotFoundException ex) {
                 System.out.println("EXPLOTO***********");
             } catch (IOException ex) {
