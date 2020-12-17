@@ -1,6 +1,0 @@
-{PRINCIPAL: int[2]p, SECUNDARIO: char[5]c, SAD: int[5]n}
-15
-3
-21|21222|22229|
-32|fdfff|32345|
-12|sda|32|*****
