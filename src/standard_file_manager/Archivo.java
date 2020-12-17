@@ -26,6 +26,24 @@ public class Archivo {
     private int contRegis;
     private int sizeRegis;
     private BufferedReader br;
+    private int primaryKeyIndex;
+    private int secondaryKeyIndex;
+
+    public int getPrimaryKeyIndex() {
+        return primaryKeyIndex;
+    }
+
+    public void setPrimaryKeyIndex(int primaryKeyIndex) {
+        this.primaryKeyIndex = primaryKeyIndex;
+    }
+
+    public int getSecondaryKeyIndex() {
+        return secondaryKeyIndex;
+    }
+
+    public void setSecondaryKeyIndex(int secondaryKeyIndex) {
+        this.secondaryKeyIndex = secondaryKeyIndex;
+    }
     
 
     public Archivo() {

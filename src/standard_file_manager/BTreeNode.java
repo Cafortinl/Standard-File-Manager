@@ -5,13 +5,14 @@
  */
 package standard_file_manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author cafor
  */
-public class BTreeNode {
+public class BTreeNode implements Serializable{
     private BTreeNode parent;
     private ArrayList<String> keys = new ArrayList();
     private ArrayList<BTreeNode> children = new ArrayList();

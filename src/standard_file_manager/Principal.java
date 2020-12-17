@@ -1356,9 +1356,11 @@ public class Principal extends javax.swing.JFrame {
         if (Key1.isSelected()&&Key2.isSelected()==false){
             k1=true;
             Key1.setEnabled(false);
+            archivo.setPrimaryKeyIndex(archivo.getCampos().size());
         }else if (Key1.isSelected()==false&&Key2.isSelected()){
             k2=true;
             Key2.setEnabled(false);
+            archivo.setSecondaryKeyIndex(archivo.getCampos().size());
         }
         Campo campo = new Campo(nombre, isChar, size,k1,k2);
         archivo.addCampo(campo);
@@ -1419,6 +1421,9 @@ public class Principal extends javax.swing.JFrame {
                 System.out.println("ME MAME PERRIN");
             }
 
+            if(!archivo.getRegistros().isEmpty()){
+                bt.escribirArchivo();
+            }
         } else {
             jf_menuCampos.pack();
             jf_menuCampos.setVisible(true);
@@ -1455,14 +1460,23 @@ public class Principal extends javax.swing.JFrame {
             if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
                 Uni_archivo = new File(path.getSelectedFile().getPath());
                 archivo.setArchivo(Uni_archivo);
+                String binPath = Uni_archivo.getPath().substring(0, Uni_archivo.getPath().length()-4);
+                binPath += ".tree";
+                bt = new AdminBTree(binPath);
             } else {
                 Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
                 archivo.setArchivo(Uni_archivo);
+                String binPath = Uni_archivo.getPath().substring(0, Uni_archivo.getPath().length()-4);
+                binPath += ".tree";
+                bt = new AdminBTree(binPath);
             }
             if (!Uni_archivo.exists()) {
                 try {
                     Uni_archivo.createNewFile();
                     archivo.setArchivo(Uni_archivo);
+                    String binPath = Uni_archivo.getPath().substring(0, Uni_archivo.getPath().length()-4);
+                    binPath += ".tree";
+                    bt = new AdminBTree(binPath);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -1607,7 +1621,29 @@ public class Principal extends javax.swing.JFrame {
                 }//btn_Salir
             }
             //temp.setID("MMCJ" + (IDTemp++));
-            archivo.addRegistro(temp);
+            if(archivo.getRegistros().isEmpty()){
+                archivo.addRegistro(temp);
+                bt.setTree(new BTree(new BTreeNode(null, true), 6));
+                String key = "";
+                key += keyGenerator(archivo.getRegistros().get(archivo.getRegistros().size()-1).getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
+                key += archivo.getRegistros().get(archivo.getRegistros().size()-1).getRRN();
+                bt.getTree().insert(key);
+                bt.getTree().BFS();
+            }else{
+                //System.out.println(bt.getListaPersonas().size());
+                String key = keyGenerator(temp.getPablo().get(archivo.getPrimaryKeyIndex())) + ";0";
+                System.out.println(bt.getTree().search(bt.getTree().getRoot(), key));
+                if(bt.getTree().search(bt.getTree().getRoot(), key)!= null){
+                    JOptionPane.showMessageDialog(this, "No se pueden repetir llaves primarias");
+                    System.out.println("No se pueden repetir llaves primarias");
+                }else{
+                    archivo.addRegistro(temp);
+                    key = "";
+                    key += keyGenerator(archivo.getRegistros().get(archivo.getRegistros().size()-1).getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
+                    key += archivo.getRegistros().get(archivo.getRegistros().size()-1).getRRN();
+                    bt.getTree().insert(key);
+                }
+            }
         }catch(Exception e){
             
         }
@@ -1662,7 +1698,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         JFileChooser path = new JFileChooser();
+        JFileChooser path = new JFileChooser();
         path.showOpenDialog(this);
         //File file;
         if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
@@ -1670,6 +1706,10 @@ public class Principal extends javax.swing.JFrame {
             Uni_archivo = new File(path.getSelectedFile().getPath());
             try {
                 archivo = new Archivo(Uni_archivo);
+                String binPath = Uni_archivo.getPath().substring(0, Uni_archivo.getPath().length()-4);
+                binPath += ".tree";
+                bt = new AdminBTree(binPath);
+                bt.cargarArchivo();
             } catch (FileNotFoundException ex) {
                 ex.printStackTrace();
             }
@@ -1677,6 +1717,10 @@ public class Principal extends javax.swing.JFrame {
             Uni_archivo = new File(path.getSelectedFile().getPath() + ".txt");
             try {
                 archivo = new Archivo(Uni_archivo);
+                String binPath = Uni_archivo.getPath().substring(0, Uni_archivo.getPath().length()-4);
+                binPath += ".tree";
+                bt = new AdminBTree(binPath);
+                bt.cargarArchivo();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1731,6 +1775,24 @@ public class Principal extends javax.swing.JFrame {
         return isNumeric;
     }
 
+    public static int keyGenerator(String key){
+        int output = 0;
+        if(calcIsNumeric(key)){
+            output = Integer.parseInt(key);
+        }else{
+            int auxInt = 0;
+            String auxString = "";
+            for(int i = 0;i < key.length();i++){
+                if(i % 2 == 0)
+                    auxInt += key.charAt(i);
+                else
+                    auxInt -= key.charAt(key.length()-i);
+            }
+            output = auxInt;
+        }
+        return output;
+    }
+    
     private int campoSeleccionado() {
         int campoSeleccionado = -1;
         DefaultTableModel modelo = (DefaultTableModel) jt_listaCampos2.getModel();
@@ -1902,6 +1964,7 @@ public class Principal extends javax.swing.JFrame {
     Archivo archivo = new Archivo();
     BufferedWriter bw;
     FileWriter fw;
+    AdminBTree bt;
     //ArrayList<Registro> RegistroTemp = new ArrayList();
     int IDTemp = 0;
 }

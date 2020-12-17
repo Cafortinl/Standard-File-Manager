@@ -5,6 +5,7 @@
  */
 package standard_file_manager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -13,7 +14,7 @@ import java.util.Queue;
  *
  * @author cafor
  */
-public class BTree {
+public class BTree implements Serializable{
     private BTreeNode root;
     private ArrayList<BTreeNode> nodes = new ArrayList();
     private int nodeSize;
