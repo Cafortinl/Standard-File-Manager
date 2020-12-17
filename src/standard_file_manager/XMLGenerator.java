@@ -1,6 +1,14 @@
 package standard_file_manager;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +43,7 @@ public class XMLGenerator {
             document.setXmlVersion("1.0");
             Element raiz = document.getDocumentElement();
             Node pi = document.createProcessingInstruction
-            ("xml-stylesheet", "type=\"text/xsl\" href=\"gato.xsl\"");
+            ("xml-stylesheet", "type=\"text/xsl\" href=\"XSML.xsl\"");
             document.insertBefore(pi, raiz);
             for (int j = 0; j < value.size(); j++) {
                 Element itemNode = document.createElement("REGISTER"); 
@@ -66,9 +74,11 @@ public class XMLGenerator {
             Result result = new StreamResult(archivo);
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
             transformer.transform(source, result);
+            Path origen = Paths.get("XMLSc.xsl");
+            Path destino = Paths.get(path+"\\XSML.xsl");
+            Files.copy(origen, destino, StandardCopyOption.REPLACE_EXISTING);
         }catch(Exception e){
             e.printStackTrace();
         } 
     }
-
 }
