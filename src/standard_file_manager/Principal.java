@@ -13,9 +13,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -1549,27 +1552,15 @@ public class Principal extends javax.swing.JFrame {
                 String[] aux=RRN.split(";");
                 String output = "---";
                 File raf2 = new File(archivo.getArchivo().getPath());
-                Scanner scan = new Scanner(raf2);
-                int auxSc = 0;
-                int auxSc2 = 0;
-                try{
-                    while( scan.hasNextLine() ){
-                        auxSc++;
-                        if( auxSc > 3 ){
-                            auxSc2++;
-                            if( auxSc2 == Integer.parseInt(aux[1]) ){
-                                output = scan.nextLine();
-                            }
-                        }
-                        scan.nextLine();
-                    }
-                }catch( Exception e ){
-                }
+                Object lineaEncontrada;
+                try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
+                    lineaEncontrada = lines.skip(Integer.parseInt(aux[1])+2).findFirst().get();
+                } 
+                System.out.println((String)lineaEncontrada);
+                output = (String)lineaEncontrada;
                 JOptionPane.showMessageDialog(this, "Lo encontro: " + output);
-            } catch (FileNotFoundException ex) {
+            } catch (Exception ex) {
                 System.out.println("EXPLOTO***********");
-            } catch (IOException ex) {
-                System.out.println("EXPLOTO2***********");
             }
             System.out.println("encontre:"+ RRN);
         }
