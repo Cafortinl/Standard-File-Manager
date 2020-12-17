@@ -14,11 +14,11 @@ cd Standard-File-Manager
 ```
 Si el proyecto es abierto con NetBeans IDE se mostrará una ventana en la que se pide resolver los problemas relacionados con las librerías del programa.
 
-![Ventana de resolver problemas](./images/ResolverProblemas.png)
+![Ventana de resolver problemas](./images/ResolverProblemas.PNG)
 
 Al darle click a "resolver" saldrá una ventana en la que muestra las librerías que están causando conflictos. Aquí se debe seleccionar buscar lo que abrirá un seleccionador de archivos en el que se debe buscar el folder en el que se clonó el proyecto.
 
-![Seleccionador de archivos](./images/Path.png)
+![Seleccionador de archivos](./images/Path.PNG)
 
 Una vez localizado el folder del proyecto se debe seleccionar el folder Standard_File_Manager/src/recursos.
 
