@@ -8,11 +8,14 @@ package standard_file_manager;
 import java.awt.FileDialog;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -1527,9 +1530,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_modificarRegistro1MouseClicked
 
     private void jb_buscarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_buscarRegistro1ActionPerformed
-        String key=JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
-        String RRN=bt.getTree().search2(bt.getTree().getRoot(), key);
-        if (RRN==null){
+        String key = JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
+        String RRN = bt.getTree().search2(bt.getTree().getRoot(), key);
+        if (RRN == null){
             JOptionPane.showMessageDialog(null, "El registro buscado no existe o sea eliminado");
         }else{
             String metaData = "";//registros = ""
@@ -1566,10 +1569,64 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jb_buscarRegistro1ActionPerformed
 
+    
     private void jb_BorrarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BorrarRegistro1ActionPerformed
-        
+        try{
+            String key=JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
+            String RRN=bt.getTree().search2(bt.getTree().getRoot(), key);
+            if( RRN != null ){
+                String[] valores = RRN.split(";");
+                int aux = Integer.parseInt(valores[1]);
+                Object lineaEncontrada;
+                try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
+                    lineaEncontrada = lines.skip(aux+2).findFirst().get();
+                }
+                String output = (String)lineaEncontrada;
+                output = '*'+output.substring(1,output.length());
+                ingresar(output,aux+2,archivo.getArchivo().getPath());
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jb_BorrarRegistro1ActionPerformed
 
+    public static void ingresar(String nuevaLinea, int posicion, String path){
+        FileWriter fichero = null;
+        PrintWriter escritor = null;
+        try {
+            String texto = leerArchivo(path);
+            System.out.println("Texto -> "+texto);
+            fichero = new FileWriter(path);
+            escritor = new PrintWriter(fichero);
+            //escritor.flush();
+            String split[] = texto.split("\n");
+            System.out.println("LEIDO ->"+leerArchivo(path));
+            System.out.println("TAMAÑO -> "+split.length);
+            Object lineaEncontrada;
+            split[posicion] = nuevaLinea;
+            for(int x = 0; x < split.length; x++){
+                escritor.write(split[x]);
+                escritor.println();
+             }
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static String leerArchivo(String path) throws IOException{
+        String acum = "";
+        String cadena;
+        FileReader f = new FileReader(path);
+        BufferedReader b = new BufferedReader(f);
+        while((cadena = b.readLine())!=null) {
+            acum += cadena + "\n";
+        }
+        b.close();
+        return acum;
+    }
+    
+    
     private void jb_ListarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_ListarRegistro1ActionPerformed
         jt_listaCampos3.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
