@@ -48,7 +48,11 @@ public class XMLGenerator {
     }
     
     public void generate(String path, String name, ArrayList<Campo> key,ArrayList<Registro> value) throws Exception{
-
+        for (int j = 0; j < value.size(); j++) {
+            for (int i = 0; i < value.get(j).getPablo().size(); i++) {
+                System.out.println("<"+value.get(i).getPablo().get(j)+">");
+            }
+        }
         if(key.isEmpty() || value.isEmpty() || key.size()!=value.size()){
             System.out.println("ERROR empty ArrayList");
             System.out.println(key.size());
@@ -74,13 +78,15 @@ public class XMLGenerator {
                 keyNode.appendChild(nodeKeyValue);      
                 //Value Node
                 Element valueNode = document.createElement("VALUE"); 
-                Text nodeValueValue = document.createTextNode(value.get(i).getPablo().get(i));                
-                valueNode.appendChild(nodeValueValue);
-                //append keyNode and valueNode to itemNode
-                itemNode.appendChild(keyNode);
-                itemNode.appendChild(valueNode);
-                //append itemNode to raiz
-                raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
+                for (int j = 0; j < value.get(i).getPablo().size(); j++) {
+                    Text nodeValueValue = document.createTextNode(value.get(j).getPablo().get(i)); 
+                    valueNode.appendChild(nodeValueValue);
+                    //append keyNode and valueNode to itemNode
+                    itemNode.appendChild(keyNode);
+                    itemNode.appendChild(valueNode);
+                    //append itemNode to raiz
+                    raiz.appendChild(itemNode); //pegamos el elemento a la raiz "Documento"
+                }
             }                
             //Generate XML
             Source source = new DOMSource(document);
