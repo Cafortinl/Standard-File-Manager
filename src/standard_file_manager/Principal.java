@@ -1570,14 +1570,16 @@ public class Principal extends javax.swing.JFrame {
             metaData +=  Integer.toString(recordSize);
             metaData +=  archivo.getContRegis();
             System.out.println("tam:"+metaData.length());
+            System.out.println(recordSize + "vs" + archivo.getSizeRegis());
             RandomAccessFile raf;
             try {
                 raf = new RandomAccessFile(archivo.getArchivo(), "r");
                 String[] aux=RRN.split(";");
-                raf.seek((metaData.length()+3)+((Integer.parseInt(aux[1])-1)*archivo.getSizeRegis()));
-                
+                //System.out.println((metaData.length()+3) + (Integer.parseInt(aux[1])-1) * archivo.getSizeRegis());
+                raf.seek((metaData.length()+2) + (Integer.parseInt(aux[1])-1) * archivo.getSizeRegis());
+                //System.out.println("char:" + raf.read());
                 String output=raf.readLine();
-                JOptionPane.showMessageDialog(null, "Lo encontro: "+output);
+                JOptionPane.showMessageDialog(this, "Lo encontro: "+output);
             } catch (FileNotFoundException ex) {
                 System.out.println("EXPLOTO***********");
             } catch (IOException ex) {
