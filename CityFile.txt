@@ -1,0 +1,103 @@
+{CityId: int[2]p, CityName: char[30]n}
+34
+100
+0|Hoorn Zwolle|*******************
+1|Enschede Zaanstad|**************
+2|Gouda Texel|********************
+3|Breda Gouda|********************
+4|Best Deventer|******************
+5|Groninga Middelburg|************
+6|Groninga Nimega|****************
+7|Naarden Delft|******************
+8|Alkmaar La Haya|****************
+9|Marken Arnhem|******************
+10|Harlingen Texel|***************
+11|Ultrecht Assen|****************
+12|Dordrecht Hoorn|***************
+13|Marken Assen|******************
+14|Marken La Haya|****************
+15|Assen Maastricht|**************
+16|Maastricht Delft|**************
+17|La Haya Eindhoven|*************
+18|Flesinga La Haya|**************
+19|Alkmaar Nimega|****************
+20|Hoorn Hilversum|***************
+21|Maastricht Eindhoven|**********
+22|Nimega Harlingen|**************
+23|La Haya Schiedam|**************
+24|Delft Dordrecht|***************
+25|Leiden Nimega|*****************
+26|Apeldoorn Nimega|**************
+27|Enschede La Haya|**************
+28|Kampen Schiedam|***************
+29|Zaanstad Amersfoort|***********
+30|Gouda Leeuwarden|**************
+31|Naarden Ultrecht|**************
+32|Assen Naarden|*****************
+33|Bolduque Schiedam|*************
+34|Groninga Leeuwarden|***********
+35|Monnicken Breda|***************
+36|Schiedam Eindhoven|************
+37|Deventer Texel|****************
+38|Gouda Maastricht|**************
+39|Amersfoort Dordrecht|**********
+40|Hilversum Den Helder|**********
+41|Amersfoort Delft|**************
+42|Lisse Deventer|****************
+43|Dordrecht Kampen|**************
+44|Dordrecht Leeuwarden|**********
+45|Zwolle Leiden|*****************
+46|Lisse Leiden|******************
+47|Vlaardingen Arnhem|************
+48|Hilversum Breda|***************
+49|Bolduque Marken|***************
+50|Zaanstad Alkmaar|**************
+51|Bolduque Texel|****************
+52|Haarlem Ultrecht|**************
+53|Naarden Assen|*****************
+54|Zoetermeer Sneek|**************
+55|Leiden Schiedam|***************
+56|Roermond Nimega|***************
+57|Sneek Texel|*******************
+58|Lisse Almere|******************
+59|Schiedam Gouda|****************
+60|Maastricht Haarlem|************
+61|Maastricht Maastricht|*********
+62|Zoetermeer La Haya|************
+63|Kampen Groninga|***************
+64|Bolduque Breda|****************
+65|Amsterdam Lisse|***************
+66|Volendam Bolduque|*************
+67|Venlo Enkhuizen|***************
+68|Sneek Nimega|******************
+69|Kampen Hilversum|**************
+70|Middelburg Kampen|*************
+71|Lelystad Leiden|***************
+72|Naarden Roterdam|**************
+73|Amersfoort Texel|**************
+74|Middelburg Marken|*************
+75|Ultrecht Monnicken|************
+76|Sneek Zutphen|*****************
+77|Maastricht Sneek|**************
+78|Zutphen Hoorn|*****************
+79|Leeuwarden Monnicken|**********
+80|Nimega Hilversum|**************
+81|Haarlem Enkhuizen|*************
+82|Deventer Middelburg|***********
+83|Deventer La Haya|**************
+84|Bolduque Hoorn|****************
+85|Apeldoorn Venlo|***************
+86|Haarlem Leiden|****************
+87|Schiedam Almere|***************
+88|Zaanstad Dordrecht|************
+89|Texel Maastricht|**************
+90|Groninga Eindhoven|************
+91|Roterdam Maastricht|***********
+92|Zutphen La Haya|***************
+93|Amsterdam Breda|***************
+94|Leiden Roterdam|***************
+95|Bolduque Lelystad|*************
+96|Alkmaar Zwolle|****************
+97|Lelystad Nimega|***************
+98|Haarlem La Haya|***************
+99|Bolduque Marken|***************

@@ -73,6 +73,8 @@ public class AdminBTree {
                 }
                 objeto.close();
                 entrada.close();
+            }else{
+                
             }
         } catch (Exception ex) {
             ex.printStackTrace();
