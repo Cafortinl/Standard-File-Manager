@@ -97,10 +97,12 @@ public class Principal extends javax.swing.JFrame {
         jb_CruzarArchivo = new javax.swing.JButton();
         jb_VolverRegistro = new javax.swing.JButton();
         cb_registros = new javax.swing.JComboBox<>();
+        jf_enlazarArchivos = new javax.swing.JFrame();
         jLabel17 = new javax.swing.JLabel();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jb_enlazarArchivos = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btn_Nuevo1 = new javax.swing.JButton();
         btn_Salvar1 = new javax.swing.JButton();
@@ -559,6 +561,17 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(106, Short.MAX_VALUE))
         );
 
+        javax.swing.GroupLayout jf_enlazarArchivosLayout = new javax.swing.GroupLayout(jf_enlazarArchivos.getContentPane());
+        jf_enlazarArchivos.getContentPane().setLayout(jf_enlazarArchivosLayout);
+        jf_enlazarArchivosLayout.setHorizontalGroup(
+            jf_enlazarArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jf_enlazarArchivosLayout.setVerticalGroup(
+            jf_enlazarArchivosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -578,15 +591,28 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jb_enlazarArchivos.setText("Enlazar archivos");
+        jb_enlazarArchivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jb_enlazarArchivosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(468, Short.MAX_VALUE)
+                .addComponent(jb_enlazarArchivos)
+                .addGap(75, 75, 75))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(243, Short.MAX_VALUE)
+                .addComponent(jb_enlazarArchivos)
+                .addGap(36, 36, 36))
         );
 
         jButton2.setText("Abrir");
@@ -669,7 +695,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1659,22 +1685,22 @@ public class Principal extends javax.swing.JFrame {
             if (RRN == null){
                 JOptionPane.showMessageDialog(null, "El registro buscado no existe o sea eliminado");
             }else{
-                String metaData = "";//registros = ""
-                int recordSize = 0;//recNum = 0;
-                for (int i = 0; i < archivo.getCampos().size(); i++) {
-                    if (i == 0) {
-                        metaData += '{';
-                        }
-                        metaData += archivo.getCampos().get(i).toString();
-                        if (i == archivo.getCampos().size() - 1) {
-                            metaData += '}';
-                    } else {
-                        metaData += ", ";
-                    }
-                    recordSize += archivo.getCampos().get(i).getSize()+1;
-                }
-                metaData +=  Integer.toString(recordSize);
-                metaData +=  archivo.getContRegis();
+//                String metaData = "";//registros = ""
+//                int recordSize = 0;//recNum = 0;
+//                for (int i = 0; i < archivo.getCampos().size(); i++) {
+//                    if (i == 0) {
+//                        metaData += '{';
+//                        }
+//                        metaData += archivo.getCampos().get(i).toString();
+//                        if (i == archivo.getCampos().size() - 1) {
+//                            metaData += '}';
+//                    } else {
+//                        metaData += ", ";
+//                    }
+//                    recordSize += archivo.getCampos().get(i).getSize()+1;
+//                }
+//                metaData +=  Integer.toString(recordSize);
+//                metaData +=  archivo.getContRegis();
                 try {
                     String[] aux=RRN.split(";");
                     String output = "---";
@@ -1683,7 +1709,7 @@ public class Principal extends javax.swing.JFrame {
                     try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
                         lineaEncontrada = lines.skip(Integer.parseInt(aux[1])+2).findFirst().get();
                     } 
-                    System.out.println((String)lineaEncontrada);
+                    System.out.println("linea: " + (String)lineaEncontrada);
                     output = (String)lineaEncontrada;
                     JOptionPane.showMessageDialog(this, "Lo encontro: " + output);
                 } catch (Exception ex) {
@@ -1711,8 +1737,9 @@ public class Principal extends javax.swing.JFrame {
                     lineaEncontrada = lines.skip(aux+2).findFirst().get();
                 }
                 String output = (String)lineaEncontrada;
-                output = '*'+output.substring(1,output.length());
-                ingresar(output,aux+2,archivo.getArchivo().getPath());
+                String pos = '*' + Integer.toString(aux) + '|';
+                output = pos + output.substring(pos.length(),output.length());
+                ingresar(output,aux+3,archivo.getArchivo().getPath());
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -2065,6 +2092,12 @@ public class Principal extends javax.swing.JFrame {
         indexar();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jb_enlazarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_enlazarArchivosActionPerformed
+        jf_enlazarArchivos.setVisible(true);
+        jf_enlazarArchivos.setLocationRelativeTo(this);
+        jf_enlazarArchivos.pack();
+    }//GEN-LAST:event_jb_enlazarArchivosActionPerformed
+
     private void deshabilitar(){
         jt_nombrecampo.setEnabled(false);
         js_tamanocampo.setEnabled(false);
@@ -2115,7 +2148,34 @@ public class Principal extends javax.swing.JFrame {
         return output;
     }
     
+    public static String findLine(int line, File file) throws IOException{
+        Object lineaEncontrada;
+        try (Stream lines = Files.lines(Paths.get(file.getPath()))) { 
+            lineaEncontrada = lines.skip(line).findFirst().get();
+            return lineaEncontrada.toString();
+        }
+    }
     
+    public void updateAvailList(){
+        
+    }
+    
+    private void delete() throws IOException{
+        archivoActual();
+        int element;
+        String RRN = null;
+        element = Integer.parseInt(findLine(3, archivo.getArchivo()));
+        String key = JOptionPane.showInputDialog(this, "");
+        switch(CualEs){
+            case 'u':
+                //RRN = bt.getTree().search
+                break;
+            case 'p':
+                break;
+            case 'c':
+                break;
+        }
+    }
     
     private int campoSeleccionado() {
         int campoSeleccionado = -1;
@@ -2262,6 +2322,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_crearCampo;
     private javax.swing.JButton jb_crearCampo1;
     private javax.swing.JButton jb_crearCampoDialog;
+    private javax.swing.JButton jb_enlazarArchivos;
     private javax.swing.JButton jb_listarCampos;
     private javax.swing.JButton jb_listarCampos1;
     private javax.swing.JButton jb_modCampoDialog;
@@ -2274,6 +2335,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JCheckBox jcb_PersonFile;
     private javax.swing.JDialog jd_crearCampo;
     private javax.swing.JDialog jd_modificarCampo;
+    private javax.swing.JFrame jf_enlazarArchivos;
     private javax.swing.JFrame jf_menuCampos;
     private javax.swing.JFrame jf_menuRegistros;
     private javax.swing.JSpinner js_tamanocampo;

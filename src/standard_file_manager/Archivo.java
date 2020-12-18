@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -26,6 +27,7 @@ public class Archivo {
     private BufferedReader br;
     private int primaryKeyIndex;
     private int secondaryKeyIndex;
+    private LinkedList<Integer> avail = new LinkedList<>();
 
     public int getPrimaryKeyIndex() {
         return primaryKeyIndex;
@@ -135,6 +137,27 @@ public class Archivo {
 
     public void setSizeRegis(int sizeRegis) {
         this.sizeRegis = sizeRegis;
+    }
+
+    public LinkedList<Integer> getAvail() {
+        return avail;
+    }
+
+    public void setAvail(LinkedList<Integer> avail) {
+        this.avail = avail;
+    }
+    
+    public void addAvail(int x){
+        this.avail.add(0, x);
+    }
+    
+    public int getAvailSpot(){
+        if(!this.avail.isEmpty()){
+            int temp = this.avail.getFirst();
+            this.avail.remove(0);
+            return temp;
+        }else
+            return -1;
     }
     
     public void calcSizeRegis(){
