@@ -85,6 +85,7 @@ public class BTree implements Serializable{
     }
     
     public void insert(String key){
+        System.out.println("ENTRO");
         BTreeNode temp = root;
         if(temp.getKeys().size() == nodeSize - 1){
             BTreeNode nNode = new BTreeNode(null, false);
