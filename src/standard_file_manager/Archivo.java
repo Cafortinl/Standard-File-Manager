@@ -52,6 +52,12 @@ public class Archivo {
 
     public Archivo() {
     }
+    
+    public Archivo(File archivo, int l){
+        this.archivo = archivo;
+        sizeRegis = l;
+        firstAvail = -1;
+    }
 
     public Archivo(File archivo) throws FileNotFoundException {
         this.archivo = archivo;

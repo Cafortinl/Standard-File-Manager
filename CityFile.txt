@@ -1,7 +1,7 @@
 {CityId: int[2]p, CityName: char[30]n}
 34
 100
--1
+10
 0|Hoorn Zwolle|*******************
 1|Enschede Zaanstad|**************
 2|Gouda Texel|********************
@@ -9,9 +9,8 @@
 4|Best Deventer|******************
 5|Groninga Middelburg|************
 6|Groninga Nimega|****************
-7|Naarden Delft|******************
+7|Narden Delft|*******************
 8|Alkmaar La Haya|****************
-9|Marken Arnhem|******************
 10|Harlingen Texel|***************
 11|Ultrecht Assen|****************
 12|Dordrecht Hoorn|***************
