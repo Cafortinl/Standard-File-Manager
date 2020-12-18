@@ -10,8 +10,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.stream.Stream;
 
 /**
  *
@@ -27,6 +30,7 @@ public class Archivo {
     private BufferedReader br;
     private int primaryKeyIndex;
     private int secondaryKeyIndex;
+    private int firstAvail;
     private LinkedList<Integer> avail = new LinkedList<>();
 
     public int getPrimaryKeyIndex() {
@@ -54,7 +58,7 @@ public class Archivo {
         br = new BufferedReader(new FileReader(archivo));
         try {
             String camposString = br.readLine();
-            System.out.println(camposString);
+            //System.out.println(camposString);
             String[] cps = camposString.substring(1,camposString.length()-1).split(", ");
             
             for (String cp : cps) {
@@ -63,14 +67,27 @@ public class Archivo {
             }
             sizeRegis = Integer.parseInt(br.readLine());
             contRegis = Integer.parseInt(br.readLine());
+            firstAvail = Integer.parseInt(br.readLine());
+            if(firstAvail > -1)
+                avail.add(firstAvail);
+            int element = firstAvail;
+            while(element > 0){
+                String salida = (String)findLine(element+3, this.archivo);
+                String[] linea = salida.split("\\|");
+                element = Integer.parseInt(linea[0].substring(1));
+                if(element > 0)
+                avail.add(0,element);
+            }
             System.out.println(contRegis);
             int pos = 1;
             while((camposString = br.readLine()) != null){
-                System.out.println(camposString);
-                registros.add(new Registro(camposString, sizeRegis, pos));
+                //System.out.println(camposString);
+                if(camposString.charAt(0) != '*')
+                    registros.add(new Registro(camposString, sizeRegis, pos));
                 pos++;
             }
-            System.out.println(contRegis);
+            System.out.println(avail);
+            //System.out.println(contRegis);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -83,6 +100,14 @@ public class Archivo {
         this.sizeRegis = sizeRegis;
     }
 
+    public static String findLine(int line, File file) throws IOException{
+        Object lineaEncontrada;
+        try (Stream lines = Files.lines(Paths.get(file.getPath()))) { 
+            lineaEncontrada = lines.skip(line).findFirst().get();
+            return lineaEncontrada.toString();
+        }
+    }
+    
     public File getArchivo() {
         return archivo;
     }
@@ -166,4 +191,13 @@ public class Archivo {
             sizeRegis += campos.get(i).getSize() + 1;
         }
     }
+
+    public int getFirstAvail() {
+        return firstAvail;
+    }
+
+    public void setFirstAvail(int firstAvail) {
+        this.firstAvail = firstAvail;
+    }
+    
 }

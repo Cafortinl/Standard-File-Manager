@@ -1,6 +1,7 @@
 {CityId: int[2]p, CityName: char[30]n}
 34
 100
+-1
 0|Hoorn Zwolle|*******************
 1|Enschede Zaanstad|**************
 2|Gouda Texel|********************

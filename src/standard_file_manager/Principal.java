@@ -1543,6 +1543,7 @@ public class Principal extends javax.swing.JFrame {
             }
             metaData += "\n" + Integer.toString(recordSize);
             metaData += "\n" + archivo.getContRegis()+"\n";
+            metaData += archivo.getFirstAvail();
 
             try {
                 fw = new FileWriter(Uni_archivo.getArchivo());
@@ -1707,7 +1708,7 @@ public class Principal extends javax.swing.JFrame {
                     File raf2 = new File(archivo.getArchivo().getPath());
                     Object lineaEncontrada;
                     try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
-                        lineaEncontrada = lines.skip(Integer.parseInt(aux[1])+2).findFirst().get();
+                        lineaEncontrada = lines.skip(Integer.parseInt(aux[1])+3).findFirst().get();
                     } 
                     System.out.println("linea: " + (String)lineaEncontrada);
                     output = (String)lineaEncontrada;
@@ -1725,24 +1726,29 @@ public class Principal extends javax.swing.JFrame {
 
     
     private void jb_BorrarRegistro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_BorrarRegistro1ActionPerformed
-        archivoActual();
-        try{
-            String key=JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
-            String RRN=bt.getTree().search2(bt.getTree().getRoot(), key);
-            if( RRN != null ){
-                String[] valores = RRN.split(";");
-                int aux = Integer.parseInt(valores[1]);
-                Object lineaEncontrada;
-                try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
-                    lineaEncontrada = lines.skip(aux+2).findFirst().get();
-                }
-                String output = (String)lineaEncontrada;
-                String pos = '*' + Integer.toString(aux) + '|';
-                output = pos + output.substring(pos.length(),output.length());
-                ingresar(output,aux+3,archivo.getArchivo().getPath());
-            }
-        }catch(Exception e){
-            e.printStackTrace();
+        try {
+            //        archivoActual();
+//        try{
+//            String key=JOptionPane.showInputDialog("Ingrese la llave del elemento: ");
+//            String RRN=bt.getTree().search2(bt.getTree().getRoot(), key);
+//            if( RRN != null ){
+//                String[] valores = RRN.split(";");
+//                int aux = Integer.parseInt(valores[1]);
+//                Object lineaEncontrada;
+//                try (Stream lines = Files.lines(Paths.get(archivo.getArchivo().getPath()))) { 
+//                    lineaEncontrada = lines.skip(aux+2).findFirst().get();
+//                }
+//                String output = (String)lineaEncontrada;
+//                String pos = '*' + Integer.toString(aux) + '|';
+//                output = pos + output.substring(pos.length(),output.length());
+//                ingresar(output,aux+3,archivo.getArchivo().getPath());
+//            }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+            delete();
+        } catch (IOException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jb_BorrarRegistro1ActionPerformed
 
@@ -2168,42 +2174,36 @@ public class Principal extends javax.swing.JFrame {
         archivoActual();
         int element, pos;
         String RRN = null, output, del="";
-        String[] valores = RRN.split(";");
-        element = Integer.parseInt(findLine(3, archivo.getArchivo()));
         String key = JOptionPane.showInputDialog(this, "Ingrese la llave del registro a eliminar: ");
         key += ";0";
         switch(CualEs){
             case 'u':
                 RRN = bt.getTree().search2(bt.getTree().getRoot(), key);
-                if(RRN != null){
-                    pos = Integer.parseInt(valores[0]);
-                    element = Integer.parseInt(findLine(3, archivo.getArchivo()));
-                    ingresar(Integer.toString(pos), 3, archivo.getArchivo().getPath());
-                    output = findLine(pos+3, archivo.getArchivo());
-                    del = '*' + Integer.toString(element) + '|';
-                    output = del + output.substring(del.length());
-                    ingresar(output, pos+3, archivo.getArchivo().getPath());
-                    indexar();
-                }else{
-                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
-                }
                 break;
             case 'p':
                 RRN = pbt.getTree().search2(pbt.getTree().getRoot(), key);
-                if(RRN != null){
-                    
-                }else{
-                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
-                }
                 break;
             case 'c':
                 RRN = cbt.getTree().search2(cbt.getTree().getRoot(), key);
-                if(RRN != null){
-                    
-                }else{
-                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
-                }
                 break;
+        }
+        if(RRN != null){
+            //element = Integer.parseInt(findLine(3, archivo.getArchivo()));
+            //System.out.println(element);
+            String[] valores = RRN.split(";");
+            pos = Integer.parseInt(valores[1]);
+            System.out.println("pos:"+pos);
+            element = Integer.parseInt(findLine(3, archivo.getArchivo()));
+            ingresar(Integer.toString(pos), 3, archivo.getArchivo().getPath());
+            archivo.setFirstAvail(pos);
+            output = findLine(pos + 3, archivo.getArchivo());
+            del = '*' + Integer.toString(element) + '|';
+            output = del + output.substring(del.length());
+            ingresar(output, pos + 3, archivo.getArchivo().getPath());
+            archivo.getRegistros().set(pos-archivo.getAvail().size(), new Registro(output, archivo.getSizeRegis(), pos));
+            indexar();
+        }else{
+            JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
         }
     }
     

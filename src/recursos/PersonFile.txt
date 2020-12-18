@@ -1,6 +1,7 @@
 {PersonId: int[6]p, PersonName: char[20]n, PersonAge: int[3]n, CityId: int[2]n}
 35
 9900
+-1
 0|Isabella|55|39|******************
 1|Isabella|92|62|******************
 2|Liam|18|45|**********************
