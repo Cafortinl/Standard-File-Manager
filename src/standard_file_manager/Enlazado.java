@@ -59,7 +59,7 @@ public class Enlazado extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -209,6 +209,7 @@ public class Enlazado extends javax.swing.JFrame {
             jl_Archivo2.setModel(new DefaultListModel());
             DefaultListModel model = (DefaultListModel)jl_Archivo2.getModel();
             for (int i = 0; i < archivo2.getCampos().size(); i++) {
+                
                 model.addElement(archivo2.getCampos().get(i));
             }
             
