@@ -11,6 +11,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -62,6 +64,11 @@ public class Enlazado extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
         jButton1.setText("➜");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jl_Archivo1.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jl_Archivo1);
@@ -86,10 +93,25 @@ public class Enlazado extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jl_Archivo3);
 
         jButton4.setText("Guardar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Reiniciar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Salir");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -167,13 +189,12 @@ public class Enlazado extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try{
             JFileChooser path = new JFileChooser();
-                path.showOpenDialog(this);
-            Archivo Archivo1 = new Archivo(new File(path.getSelectedFile().getPath()));
-            chooseFile();
+            path.showOpenDialog(this);
+            archivo1 = new Archivo(new File(path.getSelectedFile().getPath()));
             jl_Archivo1.setModel(new DefaultListModel());
             DefaultListModel model = (DefaultListModel)jl_Archivo1.getModel();
-            for (int i = 0; i < Archivo1.getCampos().size(); i++) {
-                model.addElement(Archivo1.getCampos().get(i));
+            for (int i = 0; i < archivo1.getCampos().size(); i++) {
+                model.addElement(archivo1.getCampos().get(i));
             }
         }catch(Exception e){
             System.out.println("Error");
@@ -184,51 +205,125 @@ public class Enlazado extends javax.swing.JFrame {
         try{
             JFileChooser path = new JFileChooser();
             path.showOpenDialog(this);
-            Archivo Archivo2 = new Archivo(new File(path.getSelectedFile().getPath()));
-            chooseFile();
+            archivo2 = new Archivo(new File(path.getSelectedFile().getPath()));
             jl_Archivo2.setModel(new DefaultListModel());
             DefaultListModel model = (DefaultListModel)jl_Archivo2.getModel();
-            for (int i = 0; i < Archivo2.getCampos().size(); i++) {
-                model.addElement(Archivo2.getCampos().get(i));
+            for (int i = 0; i < archivo2.getCampos().size(); i++) {
+                model.addElement(archivo2.getCampos().get(i));
             }
+            
         }catch(Exception e){
             System.out.println("Error");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public void chooseFile(){
-        try{ 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Enlazado E = new Enlazado();
+        E.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try{
+            boolean Si1 = true, Si2 = true;
+            DefaultListModel modelo = (DefaultListModel)jl_Archivo1.getModel();
+            DefaultListModel modelo2 = (DefaultListModel)jl_Archivo2.getModel();
+            DefaultListModel modelo3 = (DefaultListModel)jl_Archivo3.getModel();
+            try{
+                if(jl_Archivo1.getSelectedIndex() >= 0){
+                    for (int i = 0; i < modelo3.getSize(); i++) {
+                        if( modelo3.getElementAt(i) == modelo.getElementAt(jl_Archivo1.getSelectedIndex()) ){
+                            Si1 = false;
+                        }    
+                    }
+                    if( Si1 ){
+                        modelo3.addElement(modelo.getElementAt(jl_Archivo1.getSelectedIndex()));
+                    }
+            }
+            }catch(Exception e){
+                
+            }
+            try{
+                if(jl_Archivo2.getSelectedIndex() >= 0){
+                    for (int i = 0; i < modelo3.getSize(); i++) {
+                        if( modelo3.getElementAt(i) == modelo2.getElementAt(jl_Archivo2.getSelectedIndex()) ){
+                            Si2 = false;
+                        }    
+                    }
+                    if( Si2 ){
+                        modelo3.addElement(modelo2.getElementAt(jl_Archivo2.getSelectedIndex()));
+                    }
+                }
+            }catch(Exception e){
+                
+            }
+            jl_Archivo3.setModel(modelo3);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Error");
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        try{
+            DefaultListModel modelo3 = (DefaultListModel)jl_Archivo3.getModel();
+            ArrayList<Campo> campos = new ArrayList();
+            for (int i = 0; i < modelo3.size(); i++) {
+                campos.add((Campo)modelo3.getElementAt(i));
+            }
             JFileChooser path = new JFileChooser();
             path.showOpenDialog(this);
-            //File file;
-            if (path.getSelectedFile().getPath().substring(path.getSelectedFile().getPath().length() - 4, path.getSelectedFile().getPath().length()).equals(".txt")) {
-                System.out.println(path.getSelectedFile().getPath());
-                Uni_archivo = new Archivo(new File(path.getSelectedFile().getPath()));
-                try {
-                    archivo = new Archivo(Uni_archivo.getArchivo());
-                    String binPath = Uni_archivo.getArchivo().getPath().substring(0, Uni_archivo.getArchivo().getPath().length()-4);
-                    binPath += ".tree";
-                    bt = new AdminBTree(binPath);
-                    bt.cargarArchivo();
-                } catch (FileNotFoundException ex) {
-                    ex.printStackTrace();
+            //Uni_archivo2 = new Archivo(new File("prueba.txt") );
+            archivo3.setCampos(campos);
+            if (!archivo3.getCampos().isEmpty()) {
+                String metaData = "";//registros = ""
+                int recordSize = 0;//recNum = 0;
+                for (int i = 0; i < archivo3.getCampos().size(); i++) {
+                    if (i == 0) {
+                        metaData += '{';
+                        }
+                        metaData += archivo3.getCampos().get(i).toString();
+                        if (i == archivo3.getCampos().size() - 1) {
+                            metaData += '}';
+                    } else {
+                        metaData += ", ";
+                    }
+                    recordSize += archivo3.getCampos().get(i).getSize()+1;
                 }
-            } else {
-                Uni_archivo = new Archivo( new File(path.getSelectedFile().getPath() + ".txt") );
+                metaData += "\n" + Integer.toString(recordSize);
+                metaData += "\n" + archivo3.getContRegis()+"\n";
+
                 try {
-                    archivo = new Archivo(Uni_archivo.getArchivo());
-                    String binPath = Uni_archivo.getArchivo().getPath().substring(0, Uni_archivo.getArchivo().getPath().length()-4);
-                    binPath += ".tree";
-                    bt = new AdminBTree(binPath);
-                    bt.cargarArchivo();
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println(path.getSelectedFile().getPath());
+                    fw = new FileWriter(path.getSelectedFile().getPath()+".txt");
+                    bw = new BufferedWriter(fw);
+                    bw.append(metaData);
+                    for (int i = 0; i < archivo3.getRegistros().size(); i++) {
+                        bw.append(archivo3.getRegistros().get(i).toString()+ "\n");
+                    }
+                    bw.flush();
+                    bw.close();
+                    fw.close();
+                    JOptionPane.showMessageDialog(this, "Se ha salvado correctamente");
+                } catch (IOException ex) {
+                    System.out.println("ME MAME PERRIN");
                 }
-            } 
+
+                if(!archivo3.getRegistros().isEmpty()){
+                    bt.escribirArchivo();
+                }
+            }
         }catch(Exception e){
-            JOptionPane.showMessageDialog(this, "Error!");
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this,"Error");
         }
-    }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    
     
     /**
      * @param args the command line arguments
@@ -281,7 +376,8 @@ public class Enlazado extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_Archivo3;
     // End of variables declaration//GEN-END:variables
     int campoSelec;
-    Archivo Uni_archivo = new Archivo();
+    Archivo Uni_archivo1 = new Archivo();
+    Archivo Uni_archivo2 = new Archivo();
     Archivo archivo = new Archivo();
     Archivo archivo1 = new Archivo();
     Archivo archivo2 = new Archivo();
