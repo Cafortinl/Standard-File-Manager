@@ -1997,11 +1997,12 @@ public class Principal extends javax.swing.JFrame {
                     if (!archivo.getRegistros().isEmpty()) {
                         bt.setTree( new BTree(new BTreeNode(null,true),6) );
                         for (Registro r : archivo.getRegistros()) {
-                            String key = "";
-                            key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
-                            key += r.getRRN();
-                            bt.getTree().insert(key);
-                            //bt.getTree().BFS();
+                            if(r.getPablo().get(archivo.getPrimaryKeyIndex()).charAt(0) != '*'){
+                                String key = "";
+                                key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
+                                key += r.getRRN();
+                                bt.getTree().insert(key);
+                            }
                         }
                         bt.escribirArchivo();
                     }   break;
@@ -2009,11 +2010,13 @@ public class Principal extends javax.swing.JFrame {
                     if (!archivo.getRegistros().isEmpty()) {
                         pbt.setTree( new BTree(new BTreeNode(null,true),6) );
                         for (Registro r : archivo.getRegistros()) {
-                            String key = "";
-                            key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
-                            key += r.getRRN();
-                            pbt.getTree().insert(key);
-                            //bt.getTree().BFS();
+                            if(r.getPablo().get(archivo.getPrimaryKeyIndex()).charAt(0) != '*'){
+                                String key = "";
+                                key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
+                                key += r.getRRN();
+                                pbt.getTree().insert(key);
+                                //bt.getTree().BFS();
+                            }
                         }
                         pbt.escribirArchivo();
                     }   break;
@@ -2021,11 +2024,13 @@ public class Principal extends javax.swing.JFrame {
                     if (!archivo.getRegistros().isEmpty()) {
                         cbt.setTree( new BTree(new BTreeNode(null,true),6) );
                         for (Registro r : archivo.getRegistros()) {
-                            String key = "";
-                            key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
-                            key += r.getRRN();
-                            cbt.getTree().insert(key);
-                            //bt.getTree().BFS();
+                            if(r.getPablo().get(archivo.getPrimaryKeyIndex()).charAt(0) != '*'){
+                                String key = "";
+                                key += keyGenerator(r.getPablo().get(archivo.getPrimaryKeyIndex())) + ";";
+                                key += r.getRRN();
+                                cbt.getTree().insert(key);
+                                //bt.getTree().BFS();
+                            }
                         }
                         cbt.escribirArchivo();
                     }   break;
@@ -2093,9 +2098,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jb_enlazarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_enlazarArchivosActionPerformed
-        jf_enlazarArchivos.setVisible(true);
-        jf_enlazarArchivos.setLocationRelativeTo(this);
-        jf_enlazarArchivos.pack();
+        Enlazado e = new Enlazado();
+        e.setVisible(true);
     }//GEN-LAST:event_jb_enlazarArchivosActionPerformed
 
     private void deshabilitar(){
@@ -2162,17 +2166,43 @@ public class Principal extends javax.swing.JFrame {
     
     private void delete() throws IOException{
         archivoActual();
-        int element;
-        String RRN = null;
+        int element, pos;
+        String RRN = null, output, del="";
+        String[] valores = RRN.split(";");
         element = Integer.parseInt(findLine(3, archivo.getArchivo()));
-        String key = JOptionPane.showInputDialog(this, "");
+        String key = JOptionPane.showInputDialog(this, "Ingrese la llave del registro a eliminar: ");
+        key += ";0";
         switch(CualEs){
             case 'u':
-                //RRN = bt.getTree().search
+                RRN = bt.getTree().search2(bt.getTree().getRoot(), key);
+                if(RRN != null){
+                    pos = Integer.parseInt(valores[0]);
+                    element = Integer.parseInt(findLine(3, archivo.getArchivo()));
+                    ingresar(Integer.toString(pos), 3, archivo.getArchivo().getPath());
+                    output = findLine(pos+3, archivo.getArchivo());
+                    del = '*' + Integer.toString(element) + '|';
+                    output = del + output.substring(del.length());
+                    ingresar(output, pos+3, archivo.getArchivo().getPath());
+                    indexar();
+                }else{
+                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
+                }
                 break;
             case 'p':
+                RRN = pbt.getTree().search2(pbt.getTree().getRoot(), key);
+                if(RRN != null){
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
+                }
                 break;
             case 'c':
+                RRN = cbt.getTree().search2(cbt.getTree().getRoot(), key);
+                if(RRN != null){
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this, "La llave que desea eliminar no está en el archivo");
+                }
                 break;
         }
     }
